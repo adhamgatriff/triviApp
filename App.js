@@ -5,13 +5,19 @@
  */
 
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StatusBar, View } from 'react-native';
+import StackNavigation from './components/routes';
+import Color from './resources/Colors';
 
 const App = () => (
-  <View>
-    <Text>Welcome to React Native!</Text>
-    <Text>To get started, edit App.js</Text>
+  <View style={{ flex: 1 }}>
+    <StatusBar
+      backgroundColor={Color.black}
+      barStyle="light-content"
+    />
+    <StackNavigation />
   </View>
 );
+
 
 export default App;
