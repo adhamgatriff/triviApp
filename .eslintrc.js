@@ -12,7 +12,8 @@ module.exports = {
     "no-use-before-define": "off",
     "function-paren-newline": "off",
     "react/no-array-index-key": "off",
-    "max-len": ["error", { "code": 200 }]
+    "max-len": ["error", { "code": 200 }],
+    "react/no-unused-prop-types": "off",
   },
   "env": {
     "jest": true

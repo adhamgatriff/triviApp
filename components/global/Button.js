@@ -1,23 +1,27 @@
+// @flow
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../resources/Colors';
 
 type Props = {
-  text: String,
-  icon?: String,
+  text?:? string,
+  icon?:? string,
+  iconColor?:? string,
   buttonStyle?: StyleSheet.Styles,
   textStyle?: StyleSheet.Styles,
+  action: Function,
 };
 
 const Button = (props: Props) => {
   const {
-    text, buttonStyle, textStyle, icon,
+    text, buttonStyle, textStyle, icon, iconColor,
+    action,
   } = props;
 
   return (
-    <TouchableOpacity style={[styles.button, buttonStyle]}>
-      {!!icon && <Icon name={icon} size={30} color={Colors.black} />}
+    <TouchableOpacity style={[styles.button, buttonStyle]} onPress={action}>
+      {!!icon && <Icon name={icon} size={30} color={iconColor || Colors.black} />}
       {text && (
         <Text style={[styles.innerText, textStyle]}>
           {text.toUpperCase()}
@@ -47,7 +51,9 @@ const styles = StyleSheet.create({
 Button.defaultProps = {
   buttonStyle: {},
   textStyle: {},
+  text: null,
   icon: null,
+  iconColor: null,
 };
 
 export default Button;

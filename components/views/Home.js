@@ -1,22 +1,32 @@
+// @flow
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Colors from '../../resources/Colors';
 import Button from '../global/Button';
 
-type State = {};
+type Props = {
+  navigation: {
+    navigate: Function
+  },
+};
 
-export default class Home extends Component <State> {
-  hola = () => {};
+export default class Home extends Component <Props> {
+  handlePlay = () => {
+    const { navigation } = this.props;
+    return navigation.navigate({
+      routeName: 'Menu',
+    });
+  }
 
   render() {
     return (
       <View style={styles.wrapper}>
         <Text style={styles.title}>TriviApp</Text>
         <View style={styles.mainContainer}>
-          <Button buttonStyle={styles.button} textStyle={styles.buttonText} text="Play" />
+          <Button text="Play" buttonStyle={styles.button} textStyle={styles.buttonText} action={this.handlePlay} />
           <View style={styles.buttonWrapper}>
-            <Button buttonStyle={styles.otherButton} icon="md-stats" />
-            <Button buttonStyle={styles.otherButton} icon="md-settings" />
+            <Button buttonStyle={styles.otherButton} icon="md-stats" action={() => {}} />
+            <Button buttonStyle={styles.otherButton} icon="md-settings" action={() => {}} />
           </View>
         </View>
         <View><Text style={styles.copyrightText}>@Adhamgatriff</Text></View>
