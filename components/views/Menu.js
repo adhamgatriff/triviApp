@@ -4,8 +4,9 @@ import {
   View, StyleSheet, FlatList, Text,
 } from 'react-native';
 import Colors from '../../resources/Colors';
-import categories from '../global/categories';
+import { categories } from '../../resources/data';
 import Button from '../global/Button';
+import OptionModal from '../modal/OptionModal';
 
 type Props = {
   navigation: {
@@ -15,25 +16,41 @@ type Props = {
 };
 
 type State = {
-  categories: Array<{ value: string, name: string }>
+  isOptionModalVisible: boolean,
+  categorySelected: null | string,
 };
 
 export default class Menu extends Component <Props, State> {
-  handleCategorySelection = (value: string) => {
-    console.log(value);
+  state = {
+    isOptionModalVisible: false,
+    categorySelected: null,
   }
 
-  renderCategories = ({ value, name } : { value: string, name: string}) => (
+  toggleOptionModal = () => {
+    const { isOptionModalVisible } = this.state;
+    return this.setState({ isOptionModalVisible: !isOptionModalVisible });
+  };
+
+  setCategorySelected = (categorySelected: string) => this.setState({ categorySelected });
+
+  handleCategorySelection = (value: string) => {
+    this.setCategorySelected(value);
+    this.toggleOptionModal();
+  }
+
+  renderCategories = ({ value, label } : { value: string, label: string}) => (
     <Button
       buttonStyle={styles.menuButton}
       textStyle={styles.menuButtonText}
-      text={name}
+      text={label}
       action={() => this.handleCategorySelection(value)}
     />
   );
 
   render() {
     const { navigation } = this.props;
+    const { isOptionModalVisible, categorySelected } = this.state;
+
     return (
       <View style={styles.wrapper}>
         <View style={styles.titleWrapper}>
@@ -50,6 +67,11 @@ export default class Menu extends Component <Props, State> {
           extraData={this.state}
           keyExtractor={item => item.value}
           renderItem={({ item }) => this.renderCategories(item)}
+        />
+        <OptionModal
+          isVisible={isOptionModalVisible}
+          toggleModal={this.toggleOptionModal}
+          categorySelected={categorySelected}
         />
       </View>
     );
