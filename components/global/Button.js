@@ -16,7 +16,7 @@ type Props = {
 const Button = (props: Props) => {
   const {
     text, buttonStyle, textStyle, icon, iconColor,
-    action,
+    action, noUpperCase,
   } = props;
 
   return (
@@ -24,7 +24,7 @@ const Button = (props: Props) => {
       {!!icon && <Icon name={icon} size={30} color={iconColor || Colors.black} />}
       {text && (
         <Text style={[styles.innerText, textStyle]}>
-          {text.toUpperCase()}
+          { noUpperCase ? text : text.toUpperCase() }
         </Text>
       )}
     </TouchableOpacity>
