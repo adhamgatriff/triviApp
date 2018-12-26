@@ -5,38 +5,45 @@ import unescape from 'unescape';
 import Button from '../global/Button';
 import Colors from '../../resources/Colors';
 
-type state = {
-  currentQuestionNumber: number,
-  currentQuestion: {
-    category: string,
-    correct_answer: string,
-    difficulty: string,
-    incorrect_answers: Array<string>,
-    question: string,
-    type: string,
-  }
+type Question = {
+  category: string,
+  correct_answer: string,
+  difficulty: string,
+  incorrect_answers: Array<string>,
+  question: string,
+  type: string,
 }
 
-export default class QuestionScreen extends Component <state> {
-  constructor(props) {
-    super(props);
+type State = {
+  currentQuestionNumber: number,
+  currentQuestion:? Question,
+}
 
-    this.state = {
-      currentQuestionNumber: 0,
-      currentQuestion: null,
-    };
-  }
-
-  componentDidUpdate(prevProps) {
-    const { questions } = this.props;
-
-    if (!prevProps.questions && questions) {
-      this.showQuestion(0);
+type Props = {
+  navigation: {
+    navigate: Function,
+    getParam: Function,
+    params: {
+      questions: Array<Question>,
+      questionsLength: number,
     }
+  },
+}
+
+export default class QuestionScreen extends Component <Props, State> {
+  state = {
+    currentQuestionNumber: 0,
+    currentQuestion: null,
+  };
+
+  componentDidMount() {
+    this.showQuestion(0);
   }
 
   showQuestion = (questionNumber: number) => {
-    const { questions, questionsLength } = this.props;
+    const { navigation } = this.props;
+    const questions = navigation.getParam('questions');
+    const questionsLength = navigation.getParam('questionsLength');
 
     if (questionNumber > questionsLength - 1) {
       console.log('do something when is over');
@@ -53,13 +60,15 @@ export default class QuestionScreen extends Component <state> {
     this.showQuestion(currentQuestionNumber + 1);
   }
 
-  shuffleAnswers = (correctAnsw: Array<String>, incorrectAnsw: Array<String>) => [...incorrectAnsw, correctAnsw]
+  shuffleAnswers = (correctAnsw: string, incorrectAnsw: Array<string>): Array<string> => [...incorrectAnsw, correctAnsw]
     .map(a => [Math.random(), a])
-    .sort((a, b) => a[0] - b[0]).map(a => a[1])
+    .sort((a, b) => a[0] - b[0])
+    .map(a => a[1])
 
   render() {
     const { currentQuestion, currentQuestionNumber } = this.state;
-    const { questionsLength } = this.props;
+    const { navigation } = this.props;
+    const questionsLength = navigation.getParam('questionsLength');
 
     if (!currentQuestion) {
       return (<Text>Cargando</Text>);
@@ -86,7 +95,7 @@ export default class QuestionScreen extends Component <state> {
                 buttonStyle={{ marginVertical: 5 }}
                 textStyle={styles.answerTextStyle}
                 key={index}
-                text={answer.replace(/&#039;/g, "'")}
+                text={(answer).replace(/&#039;/g, "'")}
                 noUpperCase
                 action={() => {}}
               />

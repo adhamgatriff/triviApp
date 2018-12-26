@@ -1,19 +1,17 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from '../views/Home';
 import Menu from '../views/Menu';
-
-// remove
-import GenericComponent from '../views/genericComponent';
+import QuestionScreen from '../views/QuestionScreen';
 
 export default createAppContainer(
   createStackNavigator({
     Home: { screen: Home },
     Menu: { screen: Menu },
-    GenericComponent: { screen: GenericComponent },
+    QuestionScreen: { screen: QuestionScreen },
   },
   {
     headerMode: 'none',
-    initialRouteName: 'GenericComponent',
+    initialRouteName: 'Home',
     navigationOptions: {
       gesturesEnabled: false,
     },

@@ -11,6 +11,7 @@ type Props = {
   buttonStyle?: StyleSheet.Styles,
   textStyle?: StyleSheet.Styles,
   action: Function,
+  noUpperCase?:? boolean,
 };
 
 const Button = (props: Props) => {
@@ -54,6 +55,7 @@ Button.defaultProps = {
   text: null,
   icon: null,
   iconColor: null,
+  noUpperCase: false,
 };
 
 export default Button;

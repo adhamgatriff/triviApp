@@ -72,6 +72,7 @@ export default class Menu extends Component <Props, State> {
           isVisible={isOptionModalVisible}
           toggleModal={this.toggleOptionModal}
           categorySelected={categorySelected}
+          navigation={navigation}
         />
       </View>
     );

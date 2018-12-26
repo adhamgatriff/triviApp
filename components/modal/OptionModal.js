@@ -1,13 +1,16 @@
 // @flow
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View, Text, StyleSheet, Alert,
+} from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Sae } from 'react-native-textinput-effects';
 import RNPickerSelect from 'react-native-picker-select';
 import Colors from '../../resources/Colors';
 import Button from '../global/Button';
-import { questionNumber as questions, difficulty as difficultyItems } from '../../resources/data';
+import { questionNumber as questionsItems, difficulty as difficultyItems } from '../../resources/data';
+import fetchQuestions from '../global/Apicall';
 
 type State = {
   username: string,
@@ -16,6 +19,9 @@ type State = {
 };
 
 type Props = {
+  navigation: {
+    navigate: Function,
+  },
   isVisible: boolean,
   toggleModal: Function,
   categorySelected: null | string,
@@ -33,6 +39,37 @@ export default class OptionModal extends Component <Props, State> {
   setDifficulty = (difficulty: string) => this.setState({ difficulty });
 
   setQuestionNumber = (questionNumber: string) => this.setState({ questionNumber });
+
+  handleSubmit = async () => {
+    const { username, difficulty, questionNumber } = this.state;
+    const { navigation, categorySelected, toggleModal } = this.props;
+
+    if (!username.trim()) {
+      Alert.alert('Notification', 'The user is empty.', [{ text: 'OK' }], { cancelable: false });
+    } else if (!difficulty.trim()) {
+      Alert.alert('Notification', 'Select a difficulty.', [{ text: 'OK' }], { cancelable: false });
+    } else if (!questionNumber.trim()) {
+      Alert.alert('Notification', 'Select a number of questions.', [{ text: 'OK' }], { cancelable: false });
+    } else {
+      const questions = await fetchQuestions(difficulty, questionNumber, categorySelected)
+        .catch(() => {
+          Alert.alert(
+            'Notification',
+            'Error fetching questions, try again',
+            [{ text: 'OK' }],
+            { cancelable: false },
+          );
+        });
+
+      if (questions) {
+        toggleModal();
+        navigation.navigate('QuestionScreen', {
+          questions: questions.results,
+          questionsLength: questions.results.length,
+        });
+      }
+    }
+  }
 
   render() {
     const { isVisible, toggleModal } = this.props;
@@ -67,22 +104,24 @@ export default class OptionModal extends Component <Props, State> {
                 <RNPickerSelect
                   style={{ underline: { borderTopColor: Colors.red, borderTopWidth: 1.5 } }}
                   placeholder={{ label: 'Select a number of questions', value: null }}
-                  items={questions}
+                  placeholderTextColor={Colors.gray}
+                  items={questionsItems}
                   onValueChange={q => this.setQuestionNumber(q)}
                   value={questionNumber}
                 />
               </View>
-              <View style={styles.secondinputContainer}>
+              <View style={styles.secondInputContainer}>
                 <Text style={styles.dialogText}>Difficulty</Text>
                 <RNPickerSelect
                   style={{ underline: { borderTopColor: Colors.red, borderTopWidth: 1.5 } }}
                   placeholder={{ label: 'Select a difficulty', value: null }}
+                  placeholderTextColor={Colors.gray}
                   items={difficultyItems}
                   onValueChange={diff => this.setDifficulty(diff)}
                   value={difficulty}
                 />
               </View>
-              <Button text="GO" action={() => {}} />
+              <Button text="GO" action={this.handleSubmit} />
             </View>
           </View>
         </Modal>
@@ -113,7 +152,7 @@ const styles = StyleSheet.create({
   firstInputContainer: {
     marginTop: 10,
   },
-  secondinputContainer: {
+  secondInputContainer: {
     marginVertical: 10,
   },
   titleWrapper: {
