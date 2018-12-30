@@ -1,9 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import {
+  Text, View, StyleSheet, Alert,
+} from 'react-native';
 import unescape from 'unescape';
 import Button from '../global/Button';
 import Colors from '../../resources/Colors';
+import QuestionResultModal from '../modal/QuestionResultModal';
+import { storeData } from '../global/tools';
 
 type Question = {
   category: string,
@@ -15,8 +19,14 @@ type Question = {
 }
 
 type State = {
+  isModalVisible: boolean,
   currentQuestionNumber: number,
-  currentQuestion:? Question,
+  currentQuestion?:? Question,
+  pointsEarned: number,
+  currentCorrectAnswer: string | null,
+  answerSelected: string,
+  currentAnswers: Array<string>,
+  isCorrect: boolean,
 }
 
 type Props = {
@@ -32,8 +42,14 @@ type Props = {
 
 export default class QuestionScreen extends Component <Props, State> {
   state = {
+    isModalVisible: false,
     currentQuestionNumber: 0,
     currentQuestion: null,
+    currentAnswers: [],
+    currentCorrectAnswer: null,
+    pointsEarned: 0,
+    answerSelected: '',
+    isCorrect: false,
   };
 
   componentDidMount() {
@@ -45,12 +61,55 @@ export default class QuestionScreen extends Component <Props, State> {
     const questions = navigation.getParam('questions');
     const questionsLength = navigation.getParam('questionsLength');
 
-    if (questionNumber > questionsLength - 1) {
-      console.log('do something when is over');
+    if (!questionsLength) {
+      Alert.alert('Notification', 'An error has occurred with the api, try again.', [{ text: 'OK' }], { cancelable: false });
+    } else if (questionNumber > questionsLength - 1) {
+      const username = navigation.getParam('username');
+      const { pointsEarned } = this.state;
+
+      storeData({ user: username, points: pointsEarned });
+      this.setState({ isModalVisible: false });
     } else {
+      const currentQuestion = questions[questionNumber];
+
       this.setState({
-        currentQuestion: questions[questionNumber],
+        isModalVisible: false,
+        currentQuestion,
         currentQuestionNumber: questionNumber,
+        currentAnswers: this.shuffleAnswers(currentQuestion.correct_answer, currentQuestion.incorrect_answers),
+        currentCorrectAnswer: currentQuestion.correct_answer,
+        answerSelected: '',
+      });
+    }
+  }
+
+  showQuestionResult = () => {
+    const {
+      pointsEarned, currentQuestion, answerSelected, currentCorrectAnswer,
+    } = this.state;
+
+    if (answerSelected !== '') {
+      let points = 0;
+      let isCorrect = false;
+
+
+      if (answerSelected === currentCorrectAnswer) {
+        isCorrect = true;
+
+        if (currentQuestion && currentQuestion.difficulty === 'hard') points = 30;
+        else if (currentQuestion && currentQuestion.difficulty === 'medium') points = 20;
+        else if (currentQuestion && currentQuestion.difficulty === 'easy') points = 10;
+      }
+
+      this.setState({
+        isModalVisible: true,
+        pointsEarned: pointsEarned + points,
+        isCorrect,
+      });
+    } else {
+      Alert.alert('Notification', 'Select one option.', [{ text: 'OK' }], { cancelable: false });
+      this.setState({
+        isModalVisible: false,
       });
     }
   }
@@ -66,7 +125,10 @@ export default class QuestionScreen extends Component <Props, State> {
     .map(a => a[1])
 
   render() {
-    const { currentQuestion, currentQuestionNumber } = this.state;
+    const {
+      currentQuestion, currentQuestionNumber, answerSelected, currentAnswers,
+      isModalVisible, isCorrect, currentCorrectAnswer,
+    } = this.state;
     const { navigation } = this.props;
     const questionsLength = navigation.getParam('questionsLength');
 
@@ -89,15 +151,15 @@ export default class QuestionScreen extends Component <Props, State> {
         </View>
         <Text style={styles.title}>{unescape(currentQuestion.question.replace(/&#039;/g, "'"))}</Text>
         <View style={styles.questions}>
-          {this.shuffleAnswers(currentQuestion.correct_answer, currentQuestion.incorrect_answers)
+          {currentAnswers
             .map((answer, index) => (
               <Button
-                buttonStyle={{ marginVertical: 5 }}
-                textStyle={styles.answerTextStyle}
+                buttonStyle={[answerSelected === answer && styles.selectedAnswerButtonStyle, { marginVertical: 5 }]}
+                textStyle={[answerSelected === answer ? styles.selectedAnswerTextStyle : styles.answerTextStyle]}
                 key={index}
                 text={(answer).replace(/&#039;/g, "'")}
                 noUpperCase
-                action={() => {}}
+                action={() => this.setState({ answerSelected: answer })}
               />
             ))}
         </View>
@@ -115,10 +177,16 @@ export default class QuestionScreen extends Component <Props, State> {
             textStyle={{ letterSpacing: 0 }}
             icon="md-arrow-forward"
             iconColor={Colors.red}
-            text="Next question"
-            action={() => this.nextQuestion()}
+            text="Confirm"
+            action={this.showQuestionResult}
           />
         </View>
+        <QuestionResultModal
+          isVisible={isModalVisible}
+          isCorrect={isCorrect}
+          correctAnswer={currentCorrectAnswer}
+          nextQuestion={this.nextQuestion}
+        />
       </View>
     );
   }
@@ -166,5 +234,16 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     fontSize: 18,
     textAlign: 'center',
+  },
+  selectedAnswerTextStyle: {
+    color: Colors.black,
+    letterSpacing: 0,
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  selectedAnswerButtonStyle: {
+    backgroundColor: Colors.yellow,
+    borderColor: Colors.red,
+    borderWidth: 1,
   },
 });

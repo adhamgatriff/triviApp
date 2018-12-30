@@ -10,7 +10,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import Colors from '../../resources/Colors';
 import Button from '../global/Button';
 import { questionNumber as questionsItems, difficulty as difficultyItems } from '../../resources/data';
-import fetchQuestions from '../global/Apicall';
+import { fetchQuestions } from '../global/tools';
 
 type State = {
   username: string,
@@ -30,7 +30,7 @@ type Props = {
 export default class OptionModal extends Component <Props, State> {
   state = {
     username: 'User',
-    difficulty: 'medium',
+    difficulty: 'easy',
     questionNumber: '10',
   }
 
@@ -66,6 +66,7 @@ export default class OptionModal extends Component <Props, State> {
         navigation.navigate('QuestionScreen', {
           questions: questions.results,
           questionsLength: questions.results.length,
+          username,
         });
       }
     }
