@@ -36,6 +36,7 @@ type Props = {
     params: {
       questions: Array<Question>,
       questionsLength: number,
+      username: string,
     }
   },
 }
@@ -56,6 +57,25 @@ export default class QuestionScreen extends Component <Props, State> {
     this.showQuestion(0);
   }
 
+  goBack = () => {
+    const { navigation } = this.props;
+
+    Alert.alert(
+      'Notification',
+      'Do you want to leave the game?',
+      [
+        { text: 'Cancel', onPress: () => {}, style: 'cancel' },
+        {
+          text: 'OK',
+          onPress: () => {
+            navigation.navigate('Menu');
+          },
+        },
+      ],
+      { cancelable: false },
+    );
+  }
+
   showQuestion = (questionNumber: number) => {
     const { navigation } = this.props;
     const questions = navigation.getParam('questions');
@@ -65,10 +85,20 @@ export default class QuestionScreen extends Component <Props, State> {
       Alert.alert('Notification', 'An error has occurred with the api, try again.', [{ text: 'OK' }], { cancelable: false });
     } else if (questionNumber > questionsLength - 1) {
       const username = navigation.getParam('username');
+      const difficulty = navigation.getParam('difficulty');
+      const categorySelected = navigation.getParam('categorySelected');
       const { pointsEarned } = this.state;
 
       storeData({ user: username, points: pointsEarned });
       this.setState({ isModalVisible: false });
+
+      navigation.navigate('ResultScreen', {
+        username,
+        pointsEarned,
+        difficulty,
+        questionNumber,
+        categorySelected,
+      });
     } else {
       const currentQuestion = questions[questionNumber];
 
@@ -143,7 +173,7 @@ export default class QuestionScreen extends Component <Props, State> {
             buttonStyle={styles.backButton}
             icon="md-arrow-back"
             iconColor={Colors.yellow}
-            action={() => {}}
+            action={this.goBack}
           />
           <Text style={[styles.title, styles.questionNumberText]}>
             {`${currentQuestionNumber + 1} / ${questionsLength}`}
@@ -170,7 +200,7 @@ export default class QuestionScreen extends Component <Props, State> {
             icon="md-hand"
             iconColor={Colors.red}
             text="Skip question"
-            action={() => {}}
+            action={this.nextQuestion}
           />
           <Button
             buttonStyle={styles.backButton}

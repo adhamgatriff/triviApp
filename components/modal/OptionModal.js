@@ -67,6 +67,8 @@ export default class OptionModal extends Component <Props, State> {
           questions: questions.results,
           questionsLength: questions.results.length,
           username,
+          difficulty,
+          categorySelected,
         });
       }
     }
