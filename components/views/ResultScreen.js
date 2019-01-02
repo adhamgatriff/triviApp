@@ -7,6 +7,15 @@ import Colors from '../../resources/Colors';
 import Button from '../global/Button';
 import { fetchQuestions } from '../global/tools';
 
+type Question = {
+  category: string,
+  correct_answer: string,
+  difficulty: string,
+  incorrect_answers: Array<string>,
+  question: string,
+  type: string,
+}
+
 type Props = {
   navigation: {
     navigate: Function,
@@ -28,12 +37,12 @@ export default class ResultScreen extends Component <Props> {
 
   playAgain = async () => {
     const { navigation } = this.props;
-    const username = navigation.getParam('username');
-    const difficulty = navigation.getParam('difficulty');
-    const questionNumber = navigation.getParam('questionNumber');
-    const categorySelected = navigation.getParam('categorySelected');
+    const username: string = navigation.getParam('username');
+    const difficulty: string = navigation.getParam('difficulty');
+    const questionNumber: number = navigation.getParam('questionNumber');
+    const categorySelected: string = navigation.getParam('categorySelected');
 
-    const questions = await fetchQuestions(difficulty, questionNumber, categorySelected)
+    const questions: Array<Question> = await fetchQuestions(difficulty, questionNumber, categorySelected)
       .catch(() => {
         Alert.alert(
           'Notification',
@@ -56,8 +65,8 @@ export default class ResultScreen extends Component <Props> {
 
   render() {
     const { navigation } = this.props;
-    const username = navigation.getParam('username');
-    const pointsEarned = navigation.getParam('pointsEarned');
+    const username: string = navigation.getParam('username');
+    const pointsEarned: number = navigation.getParam('pointsEarned');
 
     return (
       <View style={styles.wrapper}>

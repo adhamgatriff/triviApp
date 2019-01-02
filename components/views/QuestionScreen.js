@@ -8,6 +8,7 @@ import Button from '../global/Button';
 import Colors from '../../resources/Colors';
 import QuestionResultModal from '../modal/QuestionResultModal';
 import { storeData } from '../global/tools';
+import Spinner from '../global/Spinner';
 
 type Question = {
   category: string,
@@ -57,7 +58,7 @@ export default class QuestionScreen extends Component <Props, State> {
     this.showQuestion(0);
   }
 
-  goBack = () => {
+  goBack = (): void => {
     const { navigation } = this.props;
 
     Alert.alert(
@@ -65,28 +66,23 @@ export default class QuestionScreen extends Component <Props, State> {
       'Do you want to leave the game?',
       [
         { text: 'Cancel', onPress: () => {}, style: 'cancel' },
-        {
-          text: 'OK',
-          onPress: () => {
-            navigation.navigate('Menu');
-          },
-        },
+        { text: 'OK', onPress: () => { navigation.navigate('Menu'); } },
       ],
       { cancelable: false },
     );
   }
 
-  showQuestion = (questionNumber: number) => {
+  showQuestion = (questionNumber: number) : void => {
     const { navigation } = this.props;
-    const questions = navigation.getParam('questions');
-    const questionsLength = navigation.getParam('questionsLength');
+    const questions: Array<Question> = navigation.getParam('questions');
+    const questionsLength: number = navigation.getParam('questionsLength');
 
     if (!questionsLength) {
       Alert.alert('Notification', 'An error has occurred with the api, try again.', [{ text: 'OK' }], { cancelable: false });
     } else if (questionNumber > questionsLength - 1) {
-      const username = navigation.getParam('username');
-      const difficulty = navigation.getParam('difficulty');
-      const categorySelected = navigation.getParam('categorySelected');
+      const username: string = navigation.getParam('username');
+      const difficulty: string = navigation.getParam('difficulty');
+      const categorySelected: string = navigation.getParam('categorySelected');
       const { pointsEarned } = this.state;
 
       storeData({ user: username, points: pointsEarned });
@@ -100,7 +96,7 @@ export default class QuestionScreen extends Component <Props, State> {
         categorySelected,
       });
     } else {
-      const currentQuestion = questions[questionNumber];
+      const currentQuestion: Question = questions[questionNumber];
 
       this.setState({
         isModalVisible: false,
@@ -113,15 +109,14 @@ export default class QuestionScreen extends Component <Props, State> {
     }
   }
 
-  showQuestionResult = () => {
+  showQuestionResult = (): void => {
     const {
       pointsEarned, currentQuestion, answerSelected, currentCorrectAnswer,
     } = this.state;
 
     if (answerSelected !== '') {
-      let points = 0;
-      let isCorrect = false;
-
+      let points: number = 0;
+      let isCorrect: boolean = false;
 
       if (answerSelected === currentCorrectAnswer) {
         isCorrect = true;
@@ -144,15 +139,15 @@ export default class QuestionScreen extends Component <Props, State> {
     }
   }
 
-  nextQuestion = () => {
+  nextQuestion = (): void => {
     const { currentQuestionNumber } = this.state;
     this.showQuestion(currentQuestionNumber + 1);
   }
 
   shuffleAnswers = (correctAnsw: string, incorrectAnsw: Array<string>): Array<string> => [...incorrectAnsw, correctAnsw]
-    .map(a => [Math.random(), a])
-    .sort((a, b) => a[0] - b[0])
-    .map(a => a[1])
+    .map((a: any) => [Math.random(), a])
+    .sort((a: any, b: any) => a[0] - b[0])
+    .map((a: any) => a[1])
 
   render() {
     const {
@@ -160,10 +155,10 @@ export default class QuestionScreen extends Component <Props, State> {
       isModalVisible, isCorrect, currentCorrectAnswer,
     } = this.state;
     const { navigation } = this.props;
-    const questionsLength = navigation.getParam('questionsLength');
+    const questionsLength: string = navigation.getParam('questionsLength');
 
     if (!currentQuestion) {
-      return (<Text>Cargando</Text>);
+      return (<Spinner />);
     }
 
     return (

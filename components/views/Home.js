@@ -18,6 +18,13 @@ export default class Home extends Component <Props> {
     });
   }
 
+  handleStats = () => {
+    const { navigation } = this.props;
+    return navigation.navigate({
+      routeName: 'Stats',
+    });
+  }
+
   render() {
     return (
       <View style={styles.wrapper}>
@@ -25,7 +32,7 @@ export default class Home extends Component <Props> {
         <View style={styles.mainContainer}>
           <Button text="Play" buttonStyle={styles.button} textStyle={styles.buttonText} action={this.handlePlay} />
           <View style={styles.buttonWrapper}>
-            <Button buttonStyle={styles.otherButton} icon="md-stats" action={() => {}} />
+            <Button buttonStyle={styles.otherButton} icon="md-stats" action={this.handleStats} />
             <Button buttonStyle={styles.otherButton} icon="md-settings" action={() => {}} />
           </View>
         </View>

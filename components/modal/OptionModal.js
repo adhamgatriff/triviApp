@@ -12,6 +12,15 @@ import Button from '../global/Button';
 import { questionNumber as questionsItems, difficulty as difficultyItems } from '../../resources/data';
 import { fetchQuestions } from '../global/tools';
 
+type Question = {
+  category: string,
+  correct_answer: string,
+  difficulty: string,
+  incorrect_answers: Array<string>,
+  question: string,
+  type: string,
+}
+
 type State = {
   username: string,
   difficulty: string,
@@ -34,11 +43,11 @@ export default class OptionModal extends Component <Props, State> {
     questionNumber: '10',
   }
 
-  setUsername = (username: string) => this.setState({ username });
+  setUsername = (username: string): void => this.setState({ username });
 
-  setDifficulty = (difficulty: string) => this.setState({ difficulty });
+  setDifficulty = (difficulty: string): void => this.setState({ difficulty });
 
-  setQuestionNumber = (questionNumber: string) => this.setState({ questionNumber });
+  setQuestionNumber = (questionNumber: string): void => this.setState({ questionNumber });
 
   handleSubmit = async () => {
     const { username, difficulty, questionNumber } = this.state;
@@ -51,7 +60,7 @@ export default class OptionModal extends Component <Props, State> {
     } else if (!questionNumber.trim()) {
       Alert.alert('Notification', 'Select a number of questions.', [{ text: 'OK' }], { cancelable: false });
     } else {
-      const questions = await fetchQuestions(difficulty, questionNumber, categorySelected)
+      const questions: Array<Question> = await fetchQuestions(difficulty, questionNumber, categorySelected)
         .catch(() => {
           Alert.alert(
             'Notification',

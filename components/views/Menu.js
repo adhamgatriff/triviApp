@@ -33,12 +33,12 @@ export default class Menu extends Component <Props, State> {
 
   setCategorySelected = (categorySelected: string) => this.setState({ categorySelected });
 
-  handleCategorySelection = (value: string) => {
+  handleCategorySelection = (value: string): void => {
     this.setCategorySelected(value);
     this.toggleOptionModal();
   }
 
-  renderCategories = ({ value, label } : { value: string, label: string}) => (
+  renderCategories = ({ value, label } : { value: string, label: string}): void => (
     <Button
       buttonStyle={styles.menuButton}
       textStyle={styles.menuButtonText}
