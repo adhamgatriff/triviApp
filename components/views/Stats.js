@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   AsyncStorage, Text, View, FlatList, StyleSheet,
 } from 'react-native';
@@ -20,13 +20,13 @@ type Props = {
   },
 };
 
-export default class Stats extends Component<Props, State> {
+export default class Stats extends React.Component<Props, State> {
   state = {
     stats: [],
     loading: true,
   }
 
-  async componentDidMount() {
+  async componentDidMount() : Promise<void> {
     const pureStats: StatsType = JSON.parse(await AsyncStorage.getItem('stats'));
     const stats: StatsType = pureStats.sort((a, b) => a.points + b.points).filter(val => val.points > 0);
 
@@ -36,7 +36,7 @@ export default class Stats extends Component<Props, State> {
     });
   }
 
-  render() {
+  render(): React.Node {
     const { stats, loading } = this.state;
     const { navigation } = this.props;
 
@@ -82,7 +82,7 @@ export default class Stats extends Component<Props, State> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles: StyleSheet.styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: Colors.black,

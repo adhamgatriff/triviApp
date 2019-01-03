@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   Text, View, StyleSheet, Alert,
 } from 'react-native';
@@ -42,7 +42,7 @@ type Props = {
   },
 }
 
-export default class QuestionScreen extends Component <Props, State> {
+export default class QuestionScreen extends React.Component <Props, State> {
   state = {
     isModalVisible: false,
     currentQuestionNumber: 0,
@@ -54,7 +54,7 @@ export default class QuestionScreen extends Component <Props, State> {
     isCorrect: false,
   };
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.showQuestion(0);
   }
 
@@ -149,7 +149,7 @@ export default class QuestionScreen extends Component <Props, State> {
     .sort((a: any, b: any) => a[0] - b[0])
     .map((a: any) => a[1])
 
-  render() {
+  render(): React.Node {
     const {
       currentQuestion, currentQuestionNumber, answerSelected, currentAnswers,
       isModalVisible, isCorrect, currentCorrectAnswer,
@@ -217,7 +217,7 @@ export default class QuestionScreen extends Component <Props, State> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles: StyleSheet.styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     justifyContent: 'space-between',

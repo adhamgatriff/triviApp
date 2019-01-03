@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   View, StyleSheet, FlatList, Text,
 } from 'react-native';
@@ -17,28 +17,28 @@ type Props = {
 
 type State = {
   isOptionModalVisible: boolean,
-  categorySelected: null | string,
+  categorySelected: string,
 };
 
-export default class Menu extends Component <Props, State> {
+export default class Menu extends React.Component <Props, State> {
   state = {
     isOptionModalVisible: false,
-    categorySelected: null,
+    categorySelected: 'any',
   }
 
-  toggleOptionModal = () => {
+  toggleOptionModal = () : void => {
     const { isOptionModalVisible } = this.state;
     return this.setState({ isOptionModalVisible: !isOptionModalVisible });
   };
 
-  setCategorySelected = (categorySelected: string) => this.setState({ categorySelected });
+  setCategorySelected = (categorySelected: string) : void => this.setState({ categorySelected });
 
   handleCategorySelection = (value: string): void => {
     this.setCategorySelected(value);
     this.toggleOptionModal();
   }
 
-  renderCategories = ({ value, label } : { value: string, label: string}): void => (
+  renderCategories = ({ value, label } : { value: string, label: string}): React.Node => (
     <Button
       buttonStyle={styles.menuButton}
       textStyle={styles.menuButtonText}
@@ -79,7 +79,7 @@ export default class Menu extends Component <Props, State> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles: StyleSheet.styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: Colors.black,

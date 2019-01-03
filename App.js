@@ -3,13 +3,13 @@
  * Aplicacion para poner en prueba tu conocimiento en distintas areas.
  * @author Adham gatriff <adhamgatriff@gmail.com>
  */
-
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { StatusBar, View } from 'react-native';
 import StackNavigation from './components/routes';
 import Color from './resources/Colors';
 
-const App = () => (
+const App = (): React.Node => (
   <View style={{ flex: 1 }}>
     <StatusBar
       backgroundColor={Color.black}

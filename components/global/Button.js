@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../resources/Colors';
@@ -14,7 +14,7 @@ type Props = {
   noUpperCase?:? boolean,
 };
 
-const Button = (props: Props) => {
+const Button = (props: Props): React.Element<typeof TouchableOpacity> => {
   const {
     text, buttonStyle, textStyle, icon, iconColor,
     action, noUpperCase,
@@ -32,7 +32,7 @@ const Button = (props: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles: StyleSheet.styles = StyleSheet.create({
   button: {
     backgroundColor: Colors.red,
     borderRadius: 18,

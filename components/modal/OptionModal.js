@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   View, Text, StyleSheet, Alert,
 } from 'react-native';
@@ -21,6 +21,10 @@ type Question = {
   type: string,
 }
 
+type FetchedQuestions = {
+  results: Array<Question>
+}
+
 type State = {
   username: string,
   difficulty: string,
@@ -33,10 +37,10 @@ type Props = {
   },
   isVisible: boolean,
   toggleModal: Function,
-  categorySelected: null | string,
+  categorySelected: string,
 }
 
-export default class OptionModal extends Component <Props, State> {
+export default class OptionModal extends React.Component <Props, State> {
   state = {
     username: 'User',
     difficulty: 'easy',
@@ -49,7 +53,7 @@ export default class OptionModal extends Component <Props, State> {
 
   setQuestionNumber = (questionNumber: string): void => this.setState({ questionNumber });
 
-  handleSubmit = async () => {
+  handleSubmit = async () : Promise<void> => {
     const { username, difficulty, questionNumber } = this.state;
     const { navigation, categorySelected, toggleModal } = this.props;
 
@@ -60,7 +64,7 @@ export default class OptionModal extends Component <Props, State> {
     } else if (!questionNumber.trim()) {
       Alert.alert('Notification', 'Select a number of questions.', [{ text: 'OK' }], { cancelable: false });
     } else {
-      const questions: Array<Question> = await fetchQuestions(difficulty, questionNumber, categorySelected)
+      const questions: FetchedQuestions = await fetchQuestions(difficulty, questionNumber, categorySelected)
         .catch(() => {
           Alert.alert(
             'Notification',
@@ -83,7 +87,7 @@ export default class OptionModal extends Component <Props, State> {
     }
   }
 
-  render() {
+  render() : React.Node {
     const { isVisible, toggleModal } = this.props;
     const { username, difficulty, questionNumber } = this.state;
 
@@ -142,7 +146,7 @@ export default class OptionModal extends Component <Props, State> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles: StyleSheet.style = StyleSheet.create({
   dialogStyle: {
     backgroundColor: Colors.yellow,
     borderRadius: 18,

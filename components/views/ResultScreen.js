@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   Text, View, StyleSheet, Alert,
 } from 'react-native';
@@ -16,6 +16,10 @@ type Question = {
   type: string,
 }
 
+type FetchedQuestions = {
+  results: Array<Question>
+}
+
 type Props = {
   navigation: {
     navigate: Function,
@@ -29,20 +33,20 @@ type Props = {
   },
 }
 
-export default class ResultScreen extends Component <Props> {
-  goToMenu = () => {
+export default class ResultScreen extends React.Component <Props> {
+  goToMenu = () : void => {
     const { navigation } = this.props;
     navigation.navigate('Home');
   }
 
-  playAgain = async () => {
+  playAgain = async () : Promise<void> => {
     const { navigation } = this.props;
     const username: string = navigation.getParam('username');
     const difficulty: string = navigation.getParam('difficulty');
-    const questionNumber: number = navigation.getParam('questionNumber');
+    const questionNumber: string = navigation.getParam('questionNumber');
     const categorySelected: string = navigation.getParam('categorySelected');
 
-    const questions: Array<Question> = await fetchQuestions(difficulty, questionNumber, categorySelected)
+    const questions: FetchedQuestions = await fetchQuestions(difficulty, questionNumber, categorySelected)
       .catch(() => {
         Alert.alert(
           'Notification',
@@ -63,7 +67,7 @@ export default class ResultScreen extends Component <Props> {
     }
   }
 
-  render() {
+  render() : React.Node {
     const { navigation } = this.props;
     const username: string = navigation.getParam('username');
     const pointsEarned: number = navigation.getParam('pointsEarned');
@@ -98,7 +102,7 @@ export default class ResultScreen extends Component <Props> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles: StyleSheet.styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     justifyContent: 'space-between',

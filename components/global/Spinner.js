@@ -1,17 +1,18 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import {
   StyleSheet, View, Text, ActivityIndicator,
 } from 'react-native';
 import Colors from '../../resources/Colors';
 
-const CustomSpinner = () => (
+const CustomSpinner = () : React.Node => (
   <View style={styles.wrapper}>
     <ActivityIndicator size="large" color={Colors.red} />
     <Text style={{ fontSize: 20, color: Colors.yellow }}>Loading</Text>
   </View>
 );
 
-const styles = StyleSheet.create({
+const styles: StyleSheet.styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignItems: 'center',
@@ -19,6 +20,5 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.black,
   },
 });
-
 
 export default CustomSpinner;

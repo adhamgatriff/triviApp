@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import {
   View, Text, StyleSheet,
 } from 'react-native';
@@ -14,7 +14,7 @@ type Props = {
   nextQuestion: Function,
 }
 
-const QuestionResultModal = (props: Props) => {
+const QuestionResultModal = (props: Props): React.Node => {
   const {
     isVisible, isCorrect, correctAnswer, nextQuestion,
   } = props;
@@ -47,9 +47,7 @@ QuestionResultModal.defaultProps = {
   correctAnswer: '',
 };
 
-export default QuestionResultModal;
-
-const styles = StyleSheet.create({
+const styles: StyleSheet.style = StyleSheet.create({
   dialogStyle: {
     backgroundColor: Colors.yellow,
     borderRadius: 18,
@@ -85,3 +83,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+export default QuestionResultModal;

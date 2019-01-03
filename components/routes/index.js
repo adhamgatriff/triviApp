@@ -1,3 +1,4 @@
+// @flow
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from '../views/Home';
 import Menu from '../views/Menu';

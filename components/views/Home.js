@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Colors from '../../resources/Colors';
 import Button from '../global/Button';
@@ -10,22 +10,22 @@ type Props = {
   },
 };
 
-export default class Home extends Component <Props> {
-  handlePlay = () => {
+export default class Home extends React.Component <Props> {
+  handlePlay = () : any => {
     const { navigation } = this.props;
     return navigation.navigate({
       routeName: 'Menu',
     });
   }
 
-  handleStats = () => {
+  handleStats = (): any => {
     const { navigation } = this.props;
     return navigation.navigate({
       routeName: 'Stats',
     });
   }
 
-  render() {
+  render() : React.Node {
     return (
       <View style={styles.wrapper}>
         <Text style={styles.title}>TriviApp</Text>
@@ -33,7 +33,7 @@ export default class Home extends Component <Props> {
           <Button text="Play" buttonStyle={styles.button} textStyle={styles.buttonText} action={this.handlePlay} />
           <View style={styles.buttonWrapper}>
             <Button buttonStyle={styles.otherButton} icon="md-stats" action={this.handleStats} />
-            <Button buttonStyle={styles.otherButton} icon="md-settings" action={() => {}} />
+            {/* <Button buttonStyle={styles.otherButton} icon="md-settings" action={() => {}} /> */}
           </View>
         </View>
         <View><Text style={styles.copyrightText}>@Adhamgatriff</Text></View>
@@ -42,7 +42,7 @@ export default class Home extends Component <Props> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles: StyleSheet.styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: Colors.black,
