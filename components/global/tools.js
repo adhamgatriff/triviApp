@@ -12,6 +12,13 @@ type FetchedQuestions = {
   }>
 }
 
+/**
+ * Bring API Questions.
+ * @param  {string} difficulty
+ * @param  {string} questionNumber
+ * @param  {string} categorySelected
+ * @returns Promise
+ */
 export const fetchQuestions = (difficulty: string, questionNumber: string, categorySelected: string) : Promise<FetchedQuestions> => {
   const APIURL: string = `https://opentdb.com/api.php?amount=${questionNumber || '10'}&category=${(categorySelected !== 'any') ? categorySelected : ''}&difficulty=${difficulty || ''}`;
 
@@ -20,6 +27,12 @@ export const fetchQuestions = (difficulty: string, questionNumber: string, categ
     .then(question => question);
 };
 
+/**
+ * Store in phone memory the stats of the round.
+ * @param {Object} data
+ * @param {string} data.user
+ * @param {number} data.points
+ */
 export const storeData = async (data: {user: string, points: number }) : Promise<void> => {
   try {
     const stats:Array<{user: string, points: number }> = JSON.parse(await AsyncStorage.getItem('stats'));

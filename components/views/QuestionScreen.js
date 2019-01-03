@@ -42,6 +42,9 @@ type Props = {
   },
 }
 
+/**
+ * Place where the questions are asked =D
+ */
 export default class QuestionScreen extends React.Component <Props, State> {
   state = {
     isModalVisible: false,
@@ -58,6 +61,9 @@ export default class QuestionScreen extends React.Component <Props, State> {
     this.showQuestion(0);
   }
 
+  /**
+   * Handle back button.
+   */
   goBack = (): void => {
     const { navigation } = this.props;
 
@@ -72,6 +78,10 @@ export default class QuestionScreen extends React.Component <Props, State> {
     );
   }
 
+  /**
+   * Show the current question in screen.
+   * @param  {number} questionNumber
+   */
   showQuestion = (questionNumber: number) : void => {
     const { navigation } = this.props;
     const questions: Array<Question> = navigation.getParam('questions');
@@ -109,6 +119,9 @@ export default class QuestionScreen extends React.Component <Props, State> {
     }
   }
 
+  /**
+   * Shows the result of the question, opens the result modal, if it is correct, it gives points.
+   */
   showQuestionResult = (): void => {
     const {
       pointsEarned, currentQuestion, answerSelected, currentCorrectAnswer,
@@ -139,11 +152,19 @@ export default class QuestionScreen extends React.Component <Props, State> {
     }
   }
 
+  /**
+   * Go to the next question.
+   */
   nextQuestion = (): void => {
     const { currentQuestionNumber } = this.state;
     this.showQuestion(currentQuestionNumber + 1);
   }
 
+  /**
+   * Shuffle the correct answer with the incorrects.
+   * @param  {string} correctAnsw
+   * @param  {Array<string>} incorrectAnsw
+   */
   shuffleAnswers = (correctAnsw: string, incorrectAnsw: Array<string>): Array<string> => [...incorrectAnsw, correctAnsw]
     .map((a: any) => [Math.random(), a])
     .sort((a: any, b: any) => a[0] - b[0])

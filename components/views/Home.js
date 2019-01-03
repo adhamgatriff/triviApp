@@ -10,7 +10,13 @@ type Props = {
   },
 };
 
+/**
+ * Home screen
+ */
 export default class Home extends React.Component <Props> {
+  /**
+   * Play button handler
+   */
   handlePlay = () : any => {
     const { navigation } = this.props;
     return navigation.navigate({
@@ -18,6 +24,9 @@ export default class Home extends React.Component <Props> {
     });
   }
 
+  /**
+   * Stats button handler
+   */
   handleStats = (): any => {
     const { navigation } = this.props;
     return navigation.navigate({

@@ -14,6 +14,7 @@ type Props = {
   noUpperCase?:? boolean,
 };
 
+/** custom button */
 const Button = (props: Props): React.Element<typeof TouchableOpacity> => {
   const {
     text, buttonStyle, textStyle, icon, iconColor,

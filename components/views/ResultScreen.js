@@ -33,12 +33,21 @@ type Props = {
   },
 }
 
+/**
+ * Show the points reached
+ */
 export default class ResultScreen extends React.Component <Props> {
+  /**
+   * Back to the menu button handler.
+   */
   goToMenu = () : void => {
     const { navigation } = this.props;
     navigation.navigate('Home');
   }
 
+  /**
+   * Play again button handler.
+   */
   playAgain = async () : Promise<void> => {
     const { navigation } = this.props;
     const username: string = navigation.getParam('username');

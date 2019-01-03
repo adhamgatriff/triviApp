@@ -1,6 +1,6 @@
 /**
  * triviApp
- * Aplicacion para poner en prueba tu conocimiento en distintas areas.
+ * Application to test your knowledge in different areas.
  * @author Adham gatriff <adhamgatriff@gmail.com>
  */
 // @flow

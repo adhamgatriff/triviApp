@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import Colors from '../../resources/Colors';
 
+/** custom spinner */
 const CustomSpinner = () : React.Node => (
   <View style={styles.wrapper}>
     <ActivityIndicator size="large" color={Colors.red} />

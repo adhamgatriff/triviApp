@@ -40,6 +40,9 @@ type Props = {
   categorySelected: string,
 }
 
+/**
+ * Option modal
+ */
 export default class OptionModal extends React.Component <Props, State> {
   state = {
     username: 'User',
@@ -47,12 +50,27 @@ export default class OptionModal extends React.Component <Props, State> {
     questionNumber: '10',
   }
 
+  /**
+   * Set username in the state.
+   * @param  {string} username
+   */
   setUsername = (username: string): void => this.setState({ username });
 
+  /**
+   * Set the difficulty in the state.
+   * @param  {string} difficulty
+   */
   setDifficulty = (difficulty: string): void => this.setState({ difficulty });
 
+  /**
+   * Set the number of questions the round will have
+   * @param  {string} questionNumber
+   */
   setQuestionNumber = (questionNumber: string): void => this.setState({ questionNumber });
 
+  /**
+   * Validate of the inputs, make a Api call and then navigate to questionScreen
+   */
   handleSubmit = async () : Promise<void> => {
     const { username, difficulty, questionNumber } = this.state;
     const { navigation, categorySelected, toggleModal } = this.props;

@@ -14,6 +14,9 @@ type Props = {
   nextQuestion: Function,
 }
 
+/**
+ * message displayed when confirming an answer.
+ */
 const QuestionResultModal = (props: Props): React.Node => {
   const {
     isVisible, isCorrect, correctAnswer, nextQuestion,

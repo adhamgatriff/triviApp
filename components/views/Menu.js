@@ -20,24 +20,43 @@ type State = {
   categorySelected: string,
 };
 
+/**
+ * Menu where to choose the category to play
+ */
 export default class Menu extends React.Component <Props, State> {
   state = {
     isOptionModalVisible: false,
     categorySelected: 'any',
   }
 
+  /**
+   * Toggle advanced options modal
+   */
   toggleOptionModal = () : void => {
     const { isOptionModalVisible } = this.state;
     return this.setState({ isOptionModalVisible: !isOptionModalVisible });
   };
 
+  /**
+   * Set the selected categorie in the state.
+   * @param  {string} categorySelected
+   */
   setCategorySelected = (categorySelected: string) : void => this.setState({ categorySelected });
 
+  /**
+   * Handler of the category pressed.
+   * @param  {string} value
+   */
   handleCategorySelection = (value: string): void => {
     this.setCategorySelected(value);
     this.toggleOptionModal();
   }
 
+  /**
+   * Shows categories in buttons.
+   * @param  {string} value - Value of the category
+   * @param  {string} label - Name of the category
+   */
   renderCategories = ({ value, label } : { value: string, label: string}): React.Node => (
     <Button
       buttonStyle={styles.menuButton}
@@ -47,7 +66,7 @@ export default class Menu extends React.Component <Props, State> {
     />
   );
 
-  render() {
+  render(): React.Node {
     const { navigation } = this.props;
     const { isOptionModalVisible, categorySelected } = this.state;
 

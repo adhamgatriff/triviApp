@@ -20,12 +20,16 @@ type Props = {
   },
 };
 
+/** Component that shows statistics */
 export default class Stats extends React.Component<Props, State> {
   state = {
     stats: [],
     loading: true,
   }
 
+  /**
+   * Get the stats, order it and remove the users with 0 points
+   */
   async componentDidMount() : Promise<void> {
     const pureStats: StatsType = JSON.parse(await AsyncStorage.getItem('stats'));
     const stats: StatsType = pureStats.sort((a, b) => a.points + b.points).filter(val => val.points > 0);
