@@ -1,0 +1,40 @@
+39533396ece2294a3ed41689e4164a8e
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");var _react = _interopRequireDefault(require("react"));
+var _reactTestRenderer = _interopRequireDefault(require("react-test-renderer"));
+var _Home = _interopRequireDefault(require("../components/views/Home"));
+var _Menu = _interopRequireDefault(require("../components/views/Menu"));
+var _QuestionScreen = _interopRequireDefault(require("../components/views/QuestionScreen"));
+var _ResultScreen = _interopRequireDefault(require("../components/views/ResultScreen"));
+var _Stats = _interopRequireDefault(require("../components/views/Stats"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\__tests__\\general-test.js";
+
+
+
+
+
+
+describe('Mains Componets render correctly', function () {
+  test('Home should render correctly', function () {
+    var tree = _reactTestRenderer.default.create(_react.default.createElement(_Home.default, { __source: { fileName: _jsxFileName, lineNumber: 16 } })).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  test('Menu should render correctly', function () {
+    var tree = _reactTestRenderer.default.create(_react.default.createElement(_Menu.default, { __source: { fileName: _jsxFileName, lineNumber: 21 } })).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  test('QuestionScreen should render correctly', function () {
+    var tree = _reactTestRenderer.default.create(_react.default.createElement(_QuestionScreen.default, { __source: { fileName: _jsxFileName, lineNumber: 26 } })).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  test('ResultScreen should render correctly', function () {
+    var tree = _reactTestRenderer.default.create(_react.default.createElement(_ResultScreen.default, { __source: { fileName: _jsxFileName, lineNumber: 31 } })).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  test('Stats should render correctly', function () {
+    var tree = _reactTestRenderer.default.create(_react.default.createElement(_Stats.default, { __source: { fileName: _jsxFileName, lineNumber: 36 } })).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});

@@ -1,0 +1,63 @@
+561c9df108e2cdb8042fb5f47deafc2d
+"use strict";var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var React = _interopRequireWildcard(require("react"));
+var _reactNative = require("react-native");
+var _Ionicons = _interopRequireDefault(require("react-native-vector-icons/Ionicons"));
+var _Colors = _interopRequireDefault(require("../../resources/Colors"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\components\\global\\Button.js";
+
+
+
+
+
+
+
+
+
+
+
+
+var Button = function Button(props) {var
+
+  text =
+
+  props.text,buttonStyle = props.buttonStyle,textStyle = props.textStyle,icon = props.icon,iconColor = props.iconColor,action = props.action,noUpperCase = props.noUpperCase;
+
+  return (
+    React.createElement(_reactNative.TouchableOpacity, { style: [styles.button, buttonStyle], onPress: action, __source: { fileName: _jsxFileName, lineNumber: 25 } },
+    !!icon && React.createElement(_Ionicons.default, { name: icon, size: 30, color: iconColor || _Colors.default.black, __source: { fileName: _jsxFileName, lineNumber: 26 } }),
+    text &&
+    React.createElement(_reactNative.Text, { style: [styles.innerText, textStyle], __source: { fileName: _jsxFileName, lineNumber: 28 } },
+    noUpperCase ? text : text.toUpperCase())));
+
+
+
+
+};
+
+var styles = _reactNative.StyleSheet.create({
+  button: {
+    backgroundColor: _Colors.default.red,
+    borderRadius: 18,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center' },
+
+  innerText: {
+    color: 'white',
+    letterSpacing: 2,
+    fontWeight: 'bold',
+    fontSize: 14 } });
+
+
+
+Button.defaultProps = {
+  buttonStyle: {},
+  textStyle: {},
+  text: null,
+  icon: null,
+  iconColor: null,
+  noUpperCase: false };var _default =
+
+
+Button;exports.default = _default;

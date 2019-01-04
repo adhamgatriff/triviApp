@@ -1,0 +1,166 @@
+1bc0113b0916c952f10b576a6fd8f046
+
+
+
+
+
+
+
+
+
+
+
+
+
+'use strict';var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\node_modules\\react-native\\Libraries\\Components\\Picker\\PickerIOS.ios.js";function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var RCTPickerIOS = require('requireNativeComponent')(
+'RCTPicker');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var PickerIOSItem = function PickerIOSItem(props) {
+  return null;
+};var
+
+PickerIOS = function (_React$Component) {_inherits(PickerIOS, _React$Component);function PickerIOS() {var _getPrototypeOf2;var _this;_classCallCheck(this, PickerIOS);for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}_this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(PickerIOS)).call.apply(_getPrototypeOf2, [this].concat(args)));_this.
+    _picker = null;_this.
+
+    state = {
+      selectedIndex: 0,
+      items: [] };_this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    _onChange = function (event) {
+      if (_this.props.onChange) {
+        _this.props.onChange(event);
+      }
+      if (_this.props.onValueChange) {
+        _this.props.onValueChange(
+        event.nativeEvent.newValue,
+        event.nativeEvent.newIndex);
+
+      }
+
+
+
+
+
+
+
+      if (
+      _this._picker &&
+      _this.state.selectedIndex !== event.nativeEvent.newIndex)
+      {
+        _this._picker.setNativeProps({
+          selectedIndex: _this.state.selectedIndex });
+
+      }
+    };return _this;}_createClass(PickerIOS, [{ key: "render", value: function render() {var _this2 = this;return require('React').createElement(require('View'), { style: this.props.style, __source: { fileName: _jsxFileName, lineNumber: 112 } }, require('React').createElement(RCTPickerIOS, { ref: function ref(picker) {_this2._picker = picker;}, style: [styles.pickerIOS, this.props.itemStyle], items: this.state.items, selectedIndex: this.state.selectedIndex, onChange: this._onChange, onStartShouldSetResponder: function onStartShouldSetResponder() {return true;}, onResponderTerminationRequest: function onResponderTerminationRequest() {return false;}, __source: { fileName: _jsxFileName, lineNumber: 113 } }));} }], [{ key: "getDerivedStateFromProps", value: function getDerivedStateFromProps(props) {var selectedIndex = 0;var items = [];require('React').Children.toArray(props.children).forEach(function (child, index) {if (child.props.value === props.selectedValue) {selectedIndex = index;}items.push({ value: child.props.value, label: child.props.label, textColor: require('processColor')(child.props.color) });});return { selectedIndex: selectedIndex, items: items };} }]);return PickerIOS;}(require('React').Component);PickerIOS.Item = PickerIOSItem;
+
+
+var styles = require('StyleSheet').create({
+  pickerIOS: {
+
+
+
+    height: 216 } });
+
+
+
+module.exports = PickerIOS;

@@ -1,0 +1,298 @@
+dcfb305889a5e72181d93450a4e81d54
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+var React = _interopRequireWildcard(require("react"));
+var _reactNative = require("react-native");
+
+
+var _unescape = _interopRequireDefault(require("unescape"));
+var _Button = _interopRequireDefault(require("../global/Button"));
+var _Colors = _interopRequireDefault(require("../../resources/Colors"));
+var _QuestionResultModal = _interopRequireDefault(require("../modal/QuestionResultModal"));
+var _tools = require("../global/tools");
+var _Spinner = _interopRequireDefault(require("../global/Spinner"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\components\\views\\QuestionScreen.js";var
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+QuestionScreen = function (_React$Component) {(0, _inherits2.default)(QuestionScreen, _React$Component);
+  function QuestionScreen(props) {var _this;(0, _classCallCheck2.default)(this, QuestionScreen);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(QuestionScreen).call(this, props));_this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    goBack = function () {var
+      navigation = _this.props.navigation;
+
+      _reactNative.Alert.alert(
+      'Notification',
+      'Do you want to leave the game?',
+      [
+      { text: 'Cancel', onPress: function onPress() {}, style: 'cancel' },
+      { text: 'OK', onPress: function onPress() {navigation.navigate('Menu');} }],
+
+      { cancelable: false });
+
+    };_this.
+
+
+
+
+
+    showQuestion = function (questionNumber) {var
+      navigation = _this.props.navigation;
+      var questions = navigation.getParam('questions');
+      var questionsLength = navigation.getParam('questionsLength');
+
+      if (!questionsLength) {
+        _reactNative.Alert.alert('Notification', 'An error has occurred with the api, try again.', [{ text: 'OK' }], { cancelable: false });
+      } else if (questionNumber > questionsLength - 1) {
+        var username = navigation.getParam('username');
+        var difficulty = navigation.getParam('difficulty');
+        var categorySelected = navigation.getParam('categorySelected');var
+        pointsEarned = _this.state.pointsEarned;
+
+        (0, _tools.storeData)({ user: username, points: pointsEarned });
+        _this.setState({ isModalVisible: false });
+
+        navigation.navigate('ResultScreen', {
+          username: username,
+          pointsEarned: pointsEarned,
+          difficulty: difficulty,
+          questionNumber: questionNumber,
+          categorySelected: categorySelected });
+
+      } else {
+        var currentQuestion = questions[questionNumber];
+
+        _this.setState({
+          isModalVisible: false,
+          currentQuestion: currentQuestion,
+          currentQuestionNumber: questionNumber,
+          currentAnswers: _this.shuffleAnswers(currentQuestion.correct_answer, currentQuestion.incorrect_answers),
+          currentCorrectAnswer: currentQuestion.correct_answer,
+          answerSelected: '' });
+
+      }
+    };_this.
+
+
+
+
+    showQuestionResult = function () {var _this$state =
+
+
+      _this.state,pointsEarned = _this$state.pointsEarned,currentQuestion = _this$state.currentQuestion,answerSelected = _this$state.answerSelected,currentCorrectAnswer = _this$state.currentCorrectAnswer;
+
+      if (answerSelected !== '') {
+        var points = 0;
+        var isCorrect = false;
+
+        if (answerSelected === currentCorrectAnswer) {
+          isCorrect = true;
+
+          if (currentQuestion && currentQuestion.difficulty === 'hard') points = 30;else
+          if (currentQuestion && currentQuestion.difficulty === 'medium') points = 20;else
+          if (currentQuestion && currentQuestion.difficulty === 'easy') points = 10;
+        }
+
+        _this.setState({
+          isModalVisible: true,
+          pointsEarned: pointsEarned + points,
+          isCorrect: isCorrect });
+
+      } else {
+        _reactNative.Alert.alert('Notification', 'Select one option.', [{ text: 'OK' }], { cancelable: false });
+        _this.setState({
+          isModalVisible: false });
+
+      }
+    };_this.
+
+
+
+
+    nextQuestion = function () {var
+      currentQuestionNumber = _this.state.currentQuestionNumber;
+      _this.showQuestion(currentQuestionNumber + 1);
+    };_this.
+
+
+
+
+
+
+    shuffleAnswers = function (correctAnsw, incorrectAnsw) {return (0, _toConsumableArray2.default)(incorrectAnsw).concat([correctAnsw]).
+      map(function (a) {return [Math.random(), a];}).
+      sort(function (a, b) {return a[0] - b[0];}).
+      map(function (a) {return a[1];});};_this.state = { isModalVisible: false, currentQuestionNumber: 0, currentQuestion: null, currentAnswers: [], currentCorrectAnswer: null, pointsEarned: 0, answerSelected: '', isCorrect: false };return _this;}(0, _createClass2.default)(QuestionScreen, [{ key: "componentDidMount", value: function componentDidMount() {this.showQuestion(0);} }, { key: "render", value: function render()
+
+    {var _this2 = this;var _this$state2 =
+
+
+
+      this.state,currentQuestion = _this$state2.currentQuestion,currentQuestionNumber = _this$state2.currentQuestionNumber,answerSelected = _this$state2.answerSelected,currentAnswers = _this$state2.currentAnswers,isModalVisible = _this$state2.isModalVisible,isCorrect = _this$state2.isCorrect,currentCorrectAnswer = _this$state2.currentCorrectAnswer;var
+      navigation = this.props.navigation;
+      var questionsLength = navigation.getParam('questionsLength');
+
+      if (!currentQuestion) {
+        return React.createElement(_Spinner.default, { __source: { fileName: _jsxFileName, lineNumber: 186 } });
+      }
+
+      return (
+        React.createElement(_reactNative.View, { style: styles.wrapper, __source: { fileName: _jsxFileName, lineNumber: 190 } },
+        React.createElement(_reactNative.View, { style: styles.titleWrapper, __source: { fileName: _jsxFileName, lineNumber: 191 } },
+        React.createElement(_Button.default, {
+          buttonStyle: styles.backButton,
+          icon: "md-arrow-back",
+          iconColor: _Colors.default.yellow,
+          action: this.goBack, __source: { fileName: _jsxFileName, lineNumber: 192 } }),
+
+        React.createElement(_reactNative.Text, { style: [styles.title, styles.questionNumberText], __source: { fileName: _jsxFileName, lineNumber: 198 } },
+        currentQuestionNumber + 1 + " / " + questionsLength)),
+
+
+        React.createElement(_reactNative.Text, { style: styles.title, __source: { fileName: _jsxFileName, lineNumber: 202 } }, (0, _unescape.default)(currentQuestion.question.replace(/&#039;/g, "'"))),
+        React.createElement(_reactNative.View, { style: styles.questions, __source: { fileName: _jsxFileName, lineNumber: 203 } },
+        currentAnswers.
+        map(function (answer, index) {return (
+            React.createElement(_Button.default, {
+              buttonStyle: [answerSelected === answer && styles.selectedAnswerButtonStyle, { marginVertical: 5 }],
+              textStyle: [answerSelected === answer ? styles.selectedAnswerTextStyle : styles.answerTextStyle],
+              key: index,
+              text: answer.replace(/&#039;/g, "'"),
+              noUpperCase: true,
+              action: function action() {return _this2.setState({ answerSelected: answer });}, __source: { fileName: _jsxFileName, lineNumber: 206 } }));})),
+
+
+
+        React.createElement(_reactNative.View, { style: styles.buttonsBelow, __source: { fileName: _jsxFileName, lineNumber: 216 } },
+        React.createElement(_Button.default, {
+          buttonStyle: styles.backButton,
+          textStyle: { letterSpacing: 0 },
+          icon: "md-hand",
+          iconColor: _Colors.default.red,
+          text: "Skip question",
+          action: this.nextQuestion, __source: { fileName: _jsxFileName, lineNumber: 217 } }),
+
+        React.createElement(_Button.default, {
+          buttonStyle: styles.backButton,
+          textStyle: { letterSpacing: 0 },
+          icon: "md-arrow-forward",
+          iconColor: _Colors.default.red,
+          text: "Confirm",
+          action: this.showQuestionResult, __source: { fileName: _jsxFileName, lineNumber: 225 } })),
+
+
+        React.createElement(_QuestionResultModal.default, {
+          isVisible: isModalVisible,
+          isCorrect: isCorrect,
+          correctAnswer: currentCorrectAnswer,
+          nextQuestion: this.nextQuestion, __source: { fileName: _jsxFileName, lineNumber: 234 } })));
+
+
+
+    } }]);return QuestionScreen;}(React.Component);exports.default = QuestionScreen;
+
+
+var styles = _reactNative.StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    justifyContent: 'space-between',
+    backgroundColor: _Colors.default.black },
+
+  titleWrapper: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingLeft: 5,
+    marginVertical: 5,
+    flexDirection: 'row' },
+
+  title: {
+    fontFamily: 'BreeSerif',
+    fontSize: 26,
+    color: _Colors.default.gray,
+    textAlign: 'center',
+    paddingHorizontal: 10 },
+
+  questionNumberText: {
+    flex: 1,
+    textAlign: 'right',
+    color: _Colors.default.yellow,
+    paddingRight: 10 },
+
+  questions: {
+    paddingHorizontal: 10 },
+
+  backButton: {
+    backgroundColor: 'transparent' },
+
+  buttonsBelow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingBottom: 5 },
+
+  answerTextStyle: {
+    letterSpacing: 0,
+    fontSize: 18,
+    textAlign: 'center' },
+
+  selectedAnswerTextStyle: {
+    color: _Colors.default.black,
+    letterSpacing: 0,
+    fontSize: 18,
+    textAlign: 'center' },
+
+  selectedAnswerButtonStyle: {
+    backgroundColor: _Colors.default.yellow,
+    borderColor: _Colors.default.red,
+    borderWidth: 1 } });

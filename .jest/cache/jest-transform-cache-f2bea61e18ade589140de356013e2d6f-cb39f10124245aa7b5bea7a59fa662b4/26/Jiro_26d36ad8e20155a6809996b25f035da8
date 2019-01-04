@@ -1,0 +1,186 @@
+4085087d94cdb1731a18ad0bccd0d661
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _react = _interopRequireDefault(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _reactNative = require("react-native");
+
+
+
+
+
+
+
+
+
+var _BaseInput = _interopRequireDefault(require("./BaseInput"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\node_modules\\react-native-textinput-effects\\lib\\Jiro.js";function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _extends() {_extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};return _extends.apply(this, arguments);}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}
+
+var PADDING = 16;var
+
+Jiro = function (_BaseInput) {_inherits(Jiro, _BaseInput);
+
+
+
+
+
+
+
+
+
+
+  function Jiro(props, context) {var _this;_classCallCheck(this, Jiro);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Jiro).call(this, props, context));
+
+    var animationValue = props.value ? 1 : 0;
+    _this.state = {
+      value: props.value,
+      borderPositionAnim: new _reactNative.Animated.Value(animationValue),
+      borderHeightAnim: new _reactNative.Animated.Value(animationValue),
+      labelPositionAnim: new _reactNative.Animated.Value(animationValue) };return _this;
+
+  }_createClass(Jiro, [{ key: "_toggle", value: function _toggle(
+
+    isActive) {
+      var animationValue = isActive ? 1 : 0;
+      var borderPositionAnimation = _reactNative.Animated.timing(
+      this.state.borderPositionAnim,
+      {
+        toValue: animationValue,
+        eaasing: _reactNative.Easing.bezier(0.2, 1, 0.3, 1),
+        duration: 200 });
+
+
+      var borderHeightAnimation = _reactNative.Animated.timing(this.state.borderHeightAnim, {
+        toValue: animationValue,
+        eaasing: _reactNative.Easing.ease,
+        duration: 200 });
+
+      var labelPositionAnimation = _reactNative.Animated.timing(
+      this.state.labelPositionAnim,
+      {
+        toValue: animationValue,
+        eaasing: _reactNative.Easing.ease,
+        duration: 200 });
+
+
+
+      if (isActive) {
+        _reactNative.Animated.sequence([
+        borderPositionAnimation,
+        _reactNative.Animated.parallel([labelPositionAnimation, borderHeightAnimation])]).
+        start();
+      } else {
+        _reactNative.Animated.sequence([
+        borderHeightAnimation,
+        _reactNative.Animated.parallel([borderPositionAnimation, labelPositionAnimation])]).
+        start();
+      }
+    } }, { key: "render", value: function render()
+
+    {var _this$props =
+
+
+
+
+
+
+
+      this.props,label = _this$props.label,containerStyle = _this$props.style,inputStyle = _this$props.inputStyle,labelStyle = _this$props.labelStyle,borderColor = _this$props.borderColor,inputHeight = _this$props.height;var _this$state =
+
+
+
+
+
+
+      this.state,width = _this$state.width,borderPositionAnim = _this$state.borderPositionAnim,borderHeightAnim = _this$state.borderHeightAnim,labelPositionAnim = _this$state.labelPositionAnim,value = _this$state.value;
+      var totalHeight = inputHeight + 2 * PADDING;
+
+      return (
+        _react.default.createElement(_reactNative.View, {
+          style: [
+          containerStyle,
+          {
+            height: totalHeight }],
+
+
+          onLayout: this._onLayout, __source: { fileName: _jsxFileName, lineNumber: 96 } },
+
+        _react.default.createElement(_reactNative.Animated.View, {
+          style: [
+          styles.border,
+          {
+            height: borderHeightAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [3, inputHeight] }),
+
+            top: borderPositionAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [totalHeight - 3, 2 * PADDING] }),
+
+            backgroundColor: borderColor }], __source: { fileName: _jsxFileName, lineNumber: 105 } }),
+
+
+
+        _react.default.createElement(_reactNative.TextInput, _extends({
+          ref: "input" },
+        this.props, {
+          style: [
+          styles.textInput,
+          inputStyle,
+          {
+            width: width,
+            height: inputHeight }],
+
+
+          value: value,
+          onBlur: this._onBlur,
+          onChange: this._onChange,
+          onFocus: this._onFocus,
+          underlineColorAndroid: 'transparent', __source: { fileName: _jsxFileName, lineNumber: 121 } })),
+
+        _react.default.createElement(_reactNative.TouchableWithoutFeedback, { onPress: this.focus, __source: { fileName: _jsxFileName, lineNumber: 138 } },
+        _react.default.createElement(_reactNative.Animated.View, {
+          style: [
+          styles.labelContainer,
+          {
+            bottom: labelPositionAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [PADDING / 2, inputHeight + PADDING / 4] }) }], __source: { fileName: _jsxFileName, lineNumber: 139 } },
+
+
+
+
+        _react.default.createElement(_reactNative.Text, { style: [styles.label, labelStyle], __source: { fileName: _jsxFileName, lineNumber: 150 } },
+        label)))));
+
+
+
+
+
+    } }]);return Jiro;}(_BaseInput.default);exports.default = Jiro;Jiro.propTypes = { borderColor: _propTypes.default.string, height: _propTypes.default.number };Jiro.defaultProps = { borderColor: 'red', height: 48 };
+
+
+var styles = _reactNative.StyleSheet.create({
+  labelContainer: {
+    position: 'absolute',
+    left: PADDING,
+    backgroundColor: 'transparent' },
+
+  label: {
+    fontFamily: 'Arial',
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#6a7989' },
+
+  textInput: {
+    position: 'absolute',
+    bottom: 0,
+    padding: 0,
+    left: PADDING,
+    color: 'black',
+    fontSize: 18,
+    fontWeight: 'bold' },
+
+  border: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0 } });

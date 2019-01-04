@@ -1,0 +1,150 @@
+3e99154743b2729733526b788e30a552
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _react = _interopRequireDefault(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _reactNative = require("react-native");
+
+
+
+
+
+
+
+
+var _BaseInput = _interopRequireDefault(require("./BaseInput"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\node_modules\\react-native-textinput-effects\\lib\\Hoshi.js";function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _extends() {_extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};return _extends.apply(this, arguments);}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}
+
+var PADDING = 16;var
+
+Hoshi = function (_BaseInput) {_inherits(Hoshi, _BaseInput);function Hoshi() {_classCallCheck(this, Hoshi);return _possibleConstructorReturn(this, _getPrototypeOf(Hoshi).apply(this, arguments));}_createClass(Hoshi, [{ key: "render", value: function render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {var _this$props =
+
+
+
+
+
+
+
+
+      this.props,label = _this$props.label,containerStyle = _this$props.style,inputStyle = _this$props.inputStyle,labelStyle = _this$props.labelStyle,maskColor = _this$props.maskColor,borderColor = _this$props.borderColor,inputHeight = _this$props.height;var _this$state =
+      this.state,width = _this$state.width,focusedAnim = _this$state.focusedAnim,value = _this$state.value;
+      var flatStyles = _reactNative.StyleSheet.flatten(containerStyle) || {};
+      var containerWidth = flatStyles.width || width;
+
+      return (
+        _react.default.createElement(_reactNative.View, {
+          style: [
+          styles.container,
+          containerStyle,
+          {
+            height: inputHeight + PADDING,
+            width: containerWidth }],
+
+
+          onLayout: this._onLayout, __source: { fileName: _jsxFileName, lineNumber: 48 } },
+
+        _react.default.createElement(_reactNative.TextInput, _extends({
+          ref: "input" },
+        this.props, {
+          style: [
+          styles.textInput,
+          inputStyle,
+          {
+            width: width,
+            height: inputHeight }],
+
+
+          value: value,
+          onBlur: this._onBlur,
+          onChange: this._onChange,
+          onFocus: this._onFocus,
+          underlineColorAndroid: 'transparent', __source: { fileName: _jsxFileName, lineNumber: 59 } })),
+
+        _react.default.createElement(_reactNative.TouchableWithoutFeedback, { onPress: this.focus, __source: { fileName: _jsxFileName, lineNumber: 76 } },
+        _react.default.createElement(_reactNative.Animated.View, {
+          style: [
+          styles.labelContainer,
+          {
+            opacity: focusedAnim.interpolate({
+              inputRange: [0, 0.5, 1],
+              outputRange: [1, 0, 1] }),
+
+            top: focusedAnim.interpolate({
+              inputRange: [0, 0.5, 0.51, 1],
+              outputRange: [24, 24, 0, 0] }),
+
+            left: focusedAnim.interpolate({
+              inputRange: [0, 0.5, 0.51, 1],
+              outputRange: [PADDING, 2 * PADDING, 0, PADDING] }) }], __source: { fileName: _jsxFileName, lineNumber: 77 } },
+
+
+
+
+        _react.default.createElement(_reactNative.Text, { style: [styles.label, labelStyle], __source: { fileName: _jsxFileName, lineNumber: 96 } },
+        label))),
+
+
+
+        _react.default.createElement(_reactNative.View, { style: [styles.labelMask, { backgroundColor: maskColor }], __source: { fileName: _jsxFileName, lineNumber: 101 } }),
+        _react.default.createElement(_reactNative.Animated.View, {
+          style: [
+          styles.border,
+          {
+            width: focusedAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, width] }),
+
+            backgroundColor: borderColor }], __source: { fileName: _jsxFileName, lineNumber: 102 } })));
+
+
+
+
+
+    } }]);return Hoshi;}(_BaseInput.default);exports.default = Hoshi;Hoshi.propTypes = { borderColor: _propTypes.default.string, maskColor: _propTypes.default.string, height: _propTypes.default.number };Hoshi.defaultProps = { borderColor: 'red', height: 48 };
+
+
+var styles = _reactNative.StyleSheet.create({
+  container: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#b9c1ca' },
+
+  labelContainer: {
+    position: 'absolute' },
+
+  label: {
+    fontSize: 16,
+    color: '#6a7989' },
+
+  textInput: {
+    position: 'absolute',
+    bottom: 2,
+    left: PADDING,
+    padding: 0,
+    color: '#6a7989',
+    fontSize: 18,
+    fontWeight: 'bold' },
+
+  labelMask: {
+    height: 24,
+    width: PADDING },
+
+  border: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 3 } });

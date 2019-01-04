@@ -1,0 +1,217 @@
+7717860bbcd3d8ad6f23be149cfde521
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+var React = _interopRequireWildcard(require("react"));
+var _reactNative = require("react-native");
+
+
+var _reactNativeModal = _interopRequireDefault(require("react-native-modal"));
+var _Ionicons = _interopRequireDefault(require("react-native-vector-icons/Ionicons"));
+var _reactNativeTextinputEffects = require("react-native-textinput-effects");
+var _reactNativePickerSelect = _interopRequireDefault(require("react-native-picker-select"));
+var _Colors = _interopRequireDefault(require("../../resources/Colors"));
+var _Button = _interopRequireDefault(require("../global/Button"));
+var _data = require("../../resources/data");
+var _tools = require("../global/tools");var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\components\\modal\\OptionModal.js";var
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OptionModal = function (_React$Component) {(0, _inherits2.default)(OptionModal, _React$Component);
+  function OptionModal(props) {var _this;(0, _classCallCheck2.default)(this, OptionModal);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(OptionModal).call(this, props));_this.
+
+
+
+
+
+
+
+
+
+
+
+
+    setUsername = function (username) {return _this.setState({ username: username });};_this.
+
+
+
+
+
+    setDifficulty = function (difficulty) {return _this.setState({ difficulty: difficulty });};_this.
+
+
+
+
+
+    setQuestionNumber = function (questionNumber) {return _this.setState({ questionNumber: questionNumber });};_this.
+
+
+
+
+    handleSubmit = function _callee() {var _this$state, username, difficulty, questionNumber, _this$props, navigation, categorySelected, toggleModal, questions;return _regenerator.default.async(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_this$state =
+              _this.state, username = _this$state.username, difficulty = _this$state.difficulty, questionNumber = _this$state.questionNumber;_this$props =
+              _this.props, navigation = _this$props.navigation, categorySelected = _this$props.categorySelected, toggleModal = _this$props.toggleModal;if (
+
+              username.trim()) {_context.next = 6;break;}
+              _reactNative.Alert.alert('Notification', 'The user is empty.', [{ text: 'OK' }], { cancelable: false });_context.next = 18;break;case 6:if (
+              difficulty.trim()) {_context.next = 10;break;}
+              _reactNative.Alert.alert('Notification', 'Select a difficulty.', [{ text: 'OK' }], { cancelable: false });_context.next = 18;break;case 10:if (
+              questionNumber.trim()) {_context.next = 14;break;}
+              _reactNative.Alert.alert('Notification', 'Select a number of questions.', [{ text: 'OK' }], { cancelable: false });_context.next = 18;break;case 14:_context.next = 16;return _regenerator.default.awrap(
+
+              (0, _tools.fetchQuestions)(difficulty, questionNumber, categorySelected).
+              catch(function () {
+                _reactNative.Alert.alert(
+                'Notification',
+                'Error fetching questions, try again',
+                [{ text: 'OK' }],
+                { cancelable: false });
+
+              }));case 16:questions = _context.sent;
+
+              if (questions) {
+                toggleModal();
+                navigation.navigate('QuestionScreen', {
+                  questions: questions.results,
+                  questionsLength: questions.results.length,
+                  username: username,
+                  difficulty: difficulty,
+                  categorySelected: categorySelected });
+
+              }case 18:case "end":return _context.stop();}}}, null, this);};_this.state = { username: 'User', difficulty: 'easy', questionNumber: '10' };return _this;}(0, _createClass2.default)(OptionModal, [{ key: "render", value: function render()
+
+
+
+    {var _this2 = this;var _this$props2 =
+      this.props,isVisible = _this$props2.isVisible,toggleModal = _this$props2.toggleModal;var _this$state2 =
+      this.state,username = _this$state2.username,difficulty = _this$state2.difficulty,questionNumber = _this$state2.questionNumber;
+
+      return (
+        React.createElement(_reactNative.View, { __source: { fileName: _jsxFileName, lineNumber: 117 } },
+        React.createElement(_reactNativeModal.default, { isVisible: isVisible, __source: { fileName: _jsxFileName, lineNumber: 118 } },
+        React.createElement(_reactNative.View, { style: styles.dialogStyle, __source: { fileName: _jsxFileName, lineNumber: 119 } },
+        React.createElement(_reactNative.View, { style: styles.titleWrapper, __source: { fileName: _jsxFileName, lineNumber: 120 } },
+        React.createElement(_Button.default, {
+          buttonStyle: styles.backButton,
+          icon: "md-arrow-back",
+          iconColor: _Colors.default.black,
+          action: function action() {return toggleModal();}, __source: { fileName: _jsxFileName, lineNumber: 121 } }),
+
+        React.createElement(_reactNative.Text, { style: styles.title, __source: { fileName: _jsxFileName, lineNumber: 127 } }, "Options")),
+
+        React.createElement(_reactNative.View, { style: styles.container, __source: { fileName: _jsxFileName, lineNumber: 129 } },
+        React.createElement(_reactNativeTextinputEffects.Sae, {
+          label: "Username",
+          iconClass: _Ionicons.default,
+          iconName: "md-person",
+          labelStyle: styles.labelStyle,
+          inputStyle: styles.inputStyle,
+          iconColor: _Colors.default.red,
+          onChangeText: function onChangeText(text) {return _this2.setUsername(text);},
+          defaultValue: username, __source: { fileName: _jsxFileName, lineNumber: 130 } }),
+
+        React.createElement(_reactNative.View, { style: styles.firstInputContainer, __source: { fileName: _jsxFileName, lineNumber: 140 } },
+        React.createElement(_reactNative.Text, { style: styles.dialogText, __source: { fileName: _jsxFileName, lineNumber: 141 } }, "Number of questions"),
+        React.createElement(_reactNativePickerSelect.default, {
+          style: { underline: { borderTopColor: _Colors.default.red, borderTopWidth: 1.5 } },
+          placeholder: { label: 'Select a number of questions', value: null },
+          placeholderTextColor: _Colors.default.gray,
+          items: _data.questionNumber,
+          onValueChange: function onValueChange(q) {return _this2.setQuestionNumber(q);},
+          value: questionNumber, __source: { fileName: _jsxFileName, lineNumber: 142 } })),
+
+
+        React.createElement(_reactNative.View, { style: styles.secondInputContainer, __source: { fileName: _jsxFileName, lineNumber: 151 } },
+        React.createElement(_reactNative.Text, { style: styles.dialogText, __source: { fileName: _jsxFileName, lineNumber: 152 } }, "Difficulty"),
+        React.createElement(_reactNativePickerSelect.default, {
+          style: { underline: { borderTopColor: _Colors.default.red, borderTopWidth: 1.5 } },
+          placeholder: { label: 'Select a difficulty', value: null },
+          placeholderTextColor: _Colors.default.gray,
+          items: _data.difficulty,
+          onValueChange: function onValueChange(diff) {return _this2.setDifficulty(diff);},
+          value: difficulty, __source: { fileName: _jsxFileName, lineNumber: 153 } })),
+
+
+        React.createElement(_Button.default, { text: "GO", action: this.handleSubmit, __source: { fileName: _jsxFileName, lineNumber: 162 } }))))));
+
+
+
+
+
+    } }]);return OptionModal;}(React.Component);exports.default = OptionModal;
+
+
+var styles = _reactNative.StyleSheet.create({
+  dialogStyle: {
+    backgroundColor: _Colors.default.yellow,
+    borderRadius: 18 },
+
+  container: {
+    paddingHorizontal: 10,
+    marginTop: 0,
+    paddingBottom: 5 },
+
+  labelStyle: {
+    color: _Colors.default.black,
+    fontSize: 16 },
+
+  inputStyle: {
+    color: _Colors.default.black,
+    paddingTop: 0,
+    fontSize: 16 },
+
+  firstInputContainer: {
+    marginTop: 10 },
+
+  secondInputContainer: {
+    marginVertical: 10 },
+
+  titleWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 5,
+    marginTop: 5,
+    flexDirection: 'row' },
+
+  backButton: {
+    backgroundColor: 'transparent' },
+
+  title: {
+    flex: 1,
+    fontFamily: 'BreeSerif',
+    fontSize: 26,
+    color: _Colors.default.black,
+    textAlign: 'center' },
+
+  dialogText: {
+    fontSize: 12,
+    color: _Colors.default.black,
+    fontWeight: 'bold' } });

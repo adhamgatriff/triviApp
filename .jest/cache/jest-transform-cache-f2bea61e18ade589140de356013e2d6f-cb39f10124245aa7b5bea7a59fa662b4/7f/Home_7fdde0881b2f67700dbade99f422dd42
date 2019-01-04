@@ -1,0 +1,98 @@
+18c2599c8d0671a9aca8b53144e6c4d5
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+var React = _interopRequireWildcard(require("react"));
+var _reactNative = require("react-native");
+var _Colors = _interopRequireDefault(require("../../resources/Colors"));
+var _Button = _interopRequireDefault(require("../global/Button"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\components\\views\\Home.js";var
+
+
+
+
+
+
+
+
+
+
+Home = function (_React$Component) {(0, _inherits2.default)(Home, _React$Component);
+
+  function Home(props) {var _this;(0, _classCallCheck2.default)(this, Home);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Home).call(this, props));_this.
+
+
+
+
+
+    handlePlay = function () {var
+      navigation = _this.props.navigation;
+      return navigation.navigate({
+        routeName: 'Menu' });
+
+    };_this.
+
+
+
+
+    handleStats = function () {var
+      navigation = _this.props.navigation;
+      return navigation.navigate({
+        routeName: 'Stats' });
+
+    };return _this;}(0, _createClass2.default)(Home, [{ key: "render", value: function render()
+
+    {
+      return (
+        React.createElement(_reactNative.View, { style: styles.wrapper, __source: { fileName: _jsxFileName, lineNumber: 44 } },
+        React.createElement(_reactNative.Text, { style: styles.title, __source: { fileName: _jsxFileName, lineNumber: 45 } }, "TriviApp"),
+        React.createElement(_reactNative.View, { style: styles.mainContainer, __source: { fileName: _jsxFileName, lineNumber: 46 } },
+        React.createElement(_Button.default, { text: "Play", buttonStyle: styles.button, textStyle: styles.buttonText, action: this.handlePlay, __source: { fileName: _jsxFileName, lineNumber: 47 } }),
+        React.createElement(_reactNative.View, { style: styles.buttonWrapper, __source: { fileName: _jsxFileName, lineNumber: 48 } },
+        React.createElement(_Button.default, { buttonStyle: styles.otherButton, icon: "md-stats", action: this.handleStats, __source: { fileName: _jsxFileName, lineNumber: 49 } }))),
+
+
+
+        React.createElement(_reactNative.View, { __source: { fileName: _jsxFileName, lineNumber: 53 } }, React.createElement(_reactNative.Text, { style: styles.copyrightText, __source: { fileName: _jsxFileName, lineNumber: 53 } }, "@Adhamgatriff"))));
+
+
+    } }]);return Home;}(React.Component);exports.default = Home;
+
+
+var styles = _reactNative.StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    backgroundColor: _Colors.default.black,
+    justifyContent: 'space-around',
+    alignItems: 'center' },
+
+  title: {
+    fontFamily: 'BreeSerif',
+    fontSize: 56,
+    color: _Colors.default.gray },
+
+  mainContainer: {
+    width: '100%',
+    justifyContent: 'center' },
+
+  buttonWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignContent: 'space-around',
+    marginTop: 20 },
+
+  button: {
+    width: '90%',
+    height: 50,
+    alignSelf: 'center' },
+
+  buttonText: {
+    fontSize: 20 },
+
+  otherButton: {
+    backgroundColor: _Colors.default.yellow,
+    height: 45 },
+
+  copyrightText: {
+    color: _Colors.default.gray,
+    fontSize: 14,
+    alignSelf: 'flex-end' } });

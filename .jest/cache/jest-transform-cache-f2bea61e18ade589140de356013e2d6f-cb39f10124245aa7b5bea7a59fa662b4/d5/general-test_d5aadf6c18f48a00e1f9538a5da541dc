@@ -1,8 +1,0 @@
-87c75c34e5d33eb9955e45b53c533536
-
-
-describe('Prueba', function () {
-  test('adds 1 + 2 to equal 3', function () {
-    expect(1 + 2).toBe(3);
-  });
-});

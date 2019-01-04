@@ -22,10 +22,14 @@ type Props = {
 
 /** Component that shows statistics */
 export default class Stats extends React.Component<Props, State> {
-  state = {
-    stats: [],
-    loading: true,
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      stats: [],
+      loading: true,
+    };
   }
+
 
   /**
    * Get the stats, order it and remove the users with 0 points

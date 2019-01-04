@@ -1,0 +1,14 @@
+909bcbec626763bd0ae870cc611b492e
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");var _react = _interopRequireDefault(require("react"));
+var _reactTestRenderer = _interopRequireDefault(require("react-test-renderer"));
+var _Home = _interopRequireDefault(require("../components/views/Home"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\__tests__\\general-test.js";
+
+
+
+
+
+
+test('renders correctly', function () {
+  var tree = _reactTestRenderer.default.create(_react.default.createElement(_Home.default, { __source: { fileName: _jsxFileName, lineNumber: 11 } })).toJSON();
+  expect(tree).toMatchSnapshot();
+});

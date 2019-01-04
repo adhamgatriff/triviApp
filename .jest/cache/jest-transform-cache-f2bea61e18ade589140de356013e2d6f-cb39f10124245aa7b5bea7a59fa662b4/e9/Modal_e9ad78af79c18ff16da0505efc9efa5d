@@ -1,0 +1,274 @@
+f75e06f06874394c1df6f500e16ea1db
+
+
+
+
+
+
+
+
+
+
+'use strict';var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\node_modules\\react-native\\Libraries\\Modal\\Modal.js",_container;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var RCTModalHostView = require('requireNativeComponent')('RCTModalHostView');
+
+var ModalEventEmitter =
+require('Platform').OS === 'ios' && require('NativeModules').ModalManager ?
+new (require('NativeEventEmitter'))(require('NativeModules').ModalManager) :
+null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+var uniqueModalIdentifier = 0;var
+
+Modal = function (_React$Component) {_inherits(Modal, _React$Component);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function Modal(props) {var _this;_classCallCheck(this, Modal);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Modal).call(this, props));
+    Modal._confirmProps(props);
+    _this._identifier = uniqueModalIdentifier++;return _this;
+  }_createClass(Modal, [{ key: "getChildContext", value: function getChildContext()
+
+
+
+
+
+    {
+
+
+      return {
+        virtualizedList: null };
+
+    } }, { key: "componentDidMount", value: function componentDidMount()
+
+    {var _this2 = this;
+      if (ModalEventEmitter) {
+        this._eventSubscription = ModalEventEmitter.addListener(
+        'modalDismissed',
+        function (event) {
+          if (event.modalID === _this2._identifier && _this2.props.onDismiss) {
+            _this2.props.onDismiss();
+          }
+        });
+
+      }
+    } }, { key: "componentWillUnmount", value: function componentWillUnmount()
+
+    {
+      if (this._eventSubscription) {
+        this._eventSubscription.remove();
+      }
+    } }, { key: "UNSAFE_componentWillReceiveProps", value: function UNSAFE_componentWillReceiveProps(
+
+    nextProps) {
+      Modal._confirmProps(nextProps);
+    } }, { key: "render", value: function render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+      if (this.props.visible === false) {
+        return null;
+      }
+
+      var containerStyles = {
+        backgroundColor: this.props.transparent ? 'transparent' : 'white' };
+
+
+      var animationType = this.props.animationType;
+      if (!animationType) {
+
+        animationType = 'none';
+        if (this.props.animated) {
+          animationType = 'slide';
+        }
+      }
+
+      var presentationStyle = this.props.presentationStyle;
+      if (!presentationStyle) {
+        presentationStyle = 'fullScreen';
+        if (this.props.transparent) {
+          presentationStyle = 'overFullScreen';
+        }
+      }
+
+      var innerChildren = __DEV__ ?
+      require('React').createElement(require('AppContainer'), { rootTag: this.context.rootTag, __source: { fileName: _jsxFileName, lineNumber: 230 } },
+      this.props.children) :
+
+
+      this.props.children;
+
+
+      return (
+        require('React').createElement(RCTModalHostView, {
+          animationType: animationType,
+          presentationStyle: presentationStyle,
+          transparent: this.props.transparent,
+          hardwareAccelerated: this.props.hardwareAccelerated,
+          onRequestClose: this.props.onRequestClose,
+          onShow: this.props.onShow,
+          identifier: this._identifier,
+          style: styles.modal,
+          onStartShouldSetResponder: this._shouldSetResponder,
+          supportedOrientations: this.props.supportedOrientations,
+          onOrientationChange: this.props.onOrientationChange, __source: { fileName: _jsxFileName, lineNumber: 238 } },
+        require('React').createElement(require('View'), { style: [styles.container, containerStyles], __source: { fileName: _jsxFileName, lineNumber: 250 } }, innerChildren)));
+
+
+    } }, { key: "_shouldSetResponder", value: function _shouldSetResponder()
+
+
+    {
+      return true;
+    } }], [{ key: "_confirmProps", value: function _confirmProps(props) {if (props.presentationStyle && props.presentationStyle !== 'overFullScreen' && props.transparent) {console.warn("Modal with '" + props.presentationStyle + "' presentation style and 'transparent' value is not supported.");}} }]);return Modal;}(require('React').Component);Modal.propTypes = { animationType: require('prop-types').oneOf(['none', 'slide', 'fade']), presentationStyle: require('prop-types').oneOf(['fullScreen', 'pageSheet', 'formSheet', 'overFullScreen']), transparent: require('prop-types').bool, hardwareAccelerated: require('prop-types').bool, visible: require('prop-types').bool, onRequestClose: require('Platform').isTV || require('Platform').OS === 'android' ? require('prop-types').func.isRequired : require('prop-types').func, onShow: require('prop-types').func, onDismiss: require('prop-types').func, animated: require('deprecatedPropType')(require('prop-types').bool, 'Use the `animationType` prop instead.'), supportedOrientations: require('prop-types').arrayOf(require('prop-types').oneOf(['portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right'])), onOrientationChange: require('prop-types').func };Modal.defaultProps = { visible: true, hardwareAccelerated: false };Modal.contextTypes = { rootTag: require('prop-types').number };Modal.childContextTypes = { virtualizedList: require('prop-types').object };
+
+
+var side = require('I18nManager').isRTL ? 'right' : 'left';
+var styles = require('StyleSheet').create({
+  modal: {
+    position: 'absolute' },
+
+  container: (_container = {
+    position: 'absolute' }, _defineProperty(_container,
+  side, 0), _defineProperty(_container, "top",
+  0), _container) });
+
+
+
+module.exports = Modal;

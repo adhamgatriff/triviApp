@@ -14,6 +14,11 @@ type Props = {
  * Home screen
  */
 export default class Home extends React.Component <Props> {
+  // eslint-disable-next-line
+  constructor(props: Props) {
+    super(props);
+  }
+
   /**
    * Play button handler
    */

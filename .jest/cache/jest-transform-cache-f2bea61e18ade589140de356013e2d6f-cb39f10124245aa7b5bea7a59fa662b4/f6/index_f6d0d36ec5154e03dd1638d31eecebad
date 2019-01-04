@@ -1,0 +1,509 @@
+24ad6fc2b219f5338a5154bb3d249aa3
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.ReactNativeModal = exports.default = void 0;var _react = _interopRequireWildcard(require("react"));
+var _reactNative = require("react-native");
+
+
+
+
+
+
+
+
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _reactNativeAnimatable = require("react-native-animatable");
+
+
+
+
+
+var ANIMATION_DEFINITIONS = _interopRequireWildcard(require("./animations"));
+
+var _indexStyle = _interopRequireDefault(require("./index.style.js"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\node_modules\\react-native-modal\\src\\index.js";function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {};if (desc.get || desc.set) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}}newObj.default = obj;return newObj;}}function _extends() {_extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};return _extends.apply(this, arguments);}function _objectWithoutProperties(source, excluded) {if (source == null) return {};var target = _objectWithoutPropertiesLoose(source, excluded);var key, i;if (Object.getOwnPropertySymbols) {var sourceSymbolKeys = Object.getOwnPropertySymbols(source);for (i = 0; i < sourceSymbolKeys.length; i++) {key = sourceSymbolKeys[i];if (excluded.indexOf(key) >= 0) continue;if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;target[key] = source[key];}}return target;}function _objectWithoutPropertiesLoose(source, excluded) {if (source == null) return {};var target = {};var sourceKeys = Object.keys(source);var key, i;for (i = 0; i < sourceKeys.length; i++) {key = sourceKeys[i];if (excluded.indexOf(key) >= 0) continue;target[key] = source[key];}return target;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}
+
+
+(0, _reactNativeAnimatable.initializeRegistryWithDefinitions)(ANIMATION_DEFINITIONS);
+
+
+var makeAnimation = function makeAnimation(name, obj) {
+  (0, _reactNativeAnimatable.registerAnimation)(name, (0, _reactNativeAnimatable.createAnimation)(obj));
+};
+
+var isObject = function isObject(obj) {
+  return obj !== null && typeof obj === "object";
+};var
+
+ReactNativeModal = function (_Component) {_inherits(ReactNativeModal, _Component);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function ReactNativeModal(_props) {var _this;_classCallCheck(this, ReactNativeModal);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ReactNativeModal).call(this, _props));_this.state = { showContent: true, isVisible: false, deviceWidth: _reactNative.Dimensions.get("window").width, deviceHeight: _reactNative.Dimensions.get("window").height, isSwipeable: _this.props.swipeDirection ? true : false, pan: null };_this.transitionLock = null;_this.inSwipeClosingState = false;_this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    buildPanResponder = function () {
+      var animEvt = null;
+
+      if (
+      _this.props.swipeDirection === "right" ||
+      _this.props.swipeDirection === "left")
+      {
+        animEvt = _reactNative.Animated.event([null, { dx: _this.state.pan.x }]);
+      } else {
+        animEvt = _reactNative.Animated.event([null, { dy: _this.state.pan.y }]);
+      }
+
+      _this.panResponder = _reactNative.PanResponder.create({
+        onMoveShouldSetPanResponder: function onMoveShouldSetPanResponder(evt, gestureState) {
+
+
+
+
+          return Math.abs(gestureState.dx) >= 4 || Math.abs(gestureState.dy) >= 4;
+        },
+        onStartShouldSetPanResponder: function onStartShouldSetPanResponder() {
+          if (_this.props.scrollTo) {
+            if (_this.props.scrollOffset > 0) {
+              return false;
+            }
+          }
+          return true;
+        },
+        onPanResponderMove: function onPanResponderMove(evt, gestureState) {
+
+          var deviceWidth = _this.props.deviceWidth || _this.state.deviceWidth;
+          var accDistance = _this.getAccDistancePerDirection(gestureState);
+          var newOpacityFactor = 1 - accDistance / deviceWidth;
+          if (_this.isSwipeDirectionAllowed(gestureState)) {
+            _this.backdropRef &&
+            _this.backdropRef.transitionTo({
+              opacity: _this.props.backdropOpacity * newOpacityFactor });
+
+            animEvt(evt, gestureState);
+          } else {
+            if (_this.props.scrollTo) {
+              var offsetY = -gestureState.dy;
+              if (offsetY > _this.props.scrollOffsetMax) {
+                offsetY -= (offsetY - _this.props.scrollOffsetMax) / 2;
+              }
+              _this.props.scrollTo({ y: offsetY, animated: false });
+            }
+          }
+        },
+        onPanResponderRelease: function onPanResponderRelease(evt, gestureState) {
+
+          var accDistance = _this.getAccDistancePerDirection(gestureState);
+          if (accDistance > _this.props.swipeThreshold) {
+            if (_this.props.onSwipe) {
+              _this.inSwipeClosingState = true;
+              _this.props.onSwipe();
+              return;
+            }
+          }
+
+          if (_this.backdropRef) {
+            _this.backdropRef.transitionTo(
+            { opacity: _this.props.backdropOpacity },
+            _this.props.backdropTransitionInTiming);
+
+          }
+          _reactNative.Animated.spring(_this.state.pan, {
+            toValue: { x: 0, y: 0 },
+            bounciness: 0 }).
+          start();
+          if (_this.props.scrollOffset > _this.props.scrollOffsetMax) {
+            _this.props.scrollTo({
+              y: _this.props.scrollOffsetMax,
+              animated: true });
+
+          }
+        } });
+
+    };_this.
+
+    getAccDistancePerDirection = function (gestureState) {
+      switch (_this.props.swipeDirection) {
+        case "up":
+          return -gestureState.dy;
+        case "down":
+          return gestureState.dy;
+        case "right":
+          return gestureState.dx;
+        case "left":
+          return -gestureState.dx;
+        default:
+          return 0;}
+
+    };_this.
+
+    isSwipeDirectionAllowed = function (_ref) {var dy = _ref.dy,dx = _ref.dx;
+      var draggedDown = dy > 0;
+      var draggedUp = dy < 0;
+      var draggedLeft = dx < 0;
+      var draggedRight = dx > 0;
+
+      if (_this.props.swipeDirection === "up" && draggedUp) {
+        return true;
+      } else if (_this.props.swipeDirection === "down" && draggedDown) {
+        return true;
+      } else if (_this.props.swipeDirection === "right" && draggedRight) {
+        return true;
+      } else if (_this.props.swipeDirection === "left" && draggedLeft) {
+        return true;
+      }
+      return false;
+    };_this.
+
+
+    buildAnimations = function (props) {
+      var animationIn = props.animationIn;
+      var animationOut = props.animationOut;
+
+      if (isObject(animationIn)) {
+        var animationName = JSON.stringify(animationIn);
+        makeAnimation(animationName, animationIn);
+        animationIn = animationName;
+      }
+
+      if (isObject(animationOut)) {
+        var _animationName = JSON.stringify(animationOut);
+        makeAnimation(_animationName, animationOut);
+        animationOut = _animationName;
+      }
+
+      _this.animationIn = animationIn;
+      _this.animationOut = animationOut;
+    };_this.
+
+    handleDimensionsUpdate = function (dimensionsUpdate) {
+      if (!_this.props.deviceHeight && !_this.props.deviceWidth) {
+
+
+        var deviceWidth = _reactNative.Dimensions.get("window").width;
+        var deviceHeight = _reactNative.Dimensions.get("window").height;
+        if (
+        deviceWidth !== _this.state.deviceWidth ||
+        deviceHeight !== _this.state.deviceHeight)
+        {
+          _this.setState({ deviceWidth: deviceWidth, deviceHeight: deviceHeight });
+        }
+      }
+    };_this.
+
+    open = function () {
+      if (_this.transitionLock) return;
+      _this.transitionLock = true;
+      if (_this.backdropRef) {
+        _this.backdropRef.transitionTo(
+        { opacity: _this.props.backdropOpacity },
+        _this.props.backdropTransitionInTiming);
+
+      }
+
+
+
+
+      if (_this.state.isSwipeable) {
+        _this.state.pan.setValue({ x: 0, y: 0 });
+      }
+
+      if (_this.contentRef) {
+        _this.contentRef[_this.animationIn](_this.props.animationInTiming).then(
+        function () {
+          _this.transitionLock = false;
+          if (!_this.props.isVisible) {
+            _this.close();
+          } else {
+            _this.props.onModalShow();
+          }
+        });
+
+      }
+    };_this.
+
+    close = function () {
+      if (_this.transitionLock) return;
+      _this.transitionLock = true;
+      if (_this.backdropRef) {
+        _this.backdropRef.transitionTo(
+        { opacity: 0 },
+        _this.props.backdropTransitionOutTiming);
+
+      }
+
+      var animationOut = _this.animationOut;
+
+      if (_this.inSwipeClosingState) {
+        _this.inSwipeClosingState = false;
+        if (_this.props.swipeDirection === "up") {
+          animationOut = "slideOutUp";
+        } else if (_this.props.swipeDirection === "down") {
+          animationOut = "slideOutDown";
+        } else if (_this.props.swipeDirection === "right") {
+          animationOut = "slideOutRight";
+        } else if (_this.props.swipeDirection === "left") {
+          animationOut = "slideOutLeft";
+        }
+      }
+
+      if (_this.contentRef) {
+        _this.contentRef[animationOut](_this.props.animationOutTiming).then(function () {
+          _this.transitionLock = false;
+          if (_this.props.isVisible) {
+            _this.open();
+          } else {
+            _this.setState(
+            {
+              showContent: false },
+
+            function () {
+              _this.setState({
+                isVisible: false });
+
+            });
+
+            _this.props.onModalHide();
+          }
+        });
+      }
+    };_this.buildAnimations(_props);if (_this.state.isSwipeable) {_this.state = _objectSpread({}, _this.state, { pan: new _reactNative.Animated.ValueXY() });_this.buildPanResponder();}if (_this.props.isVisible) {_this.state = _objectSpread({}, _this.state, { isVisible: true, showContent: true });}return _this;}_createClass(ReactNativeModal, [{ key: "UNSAFE_componentWillReceiveProps", value: function UNSAFE_componentWillReceiveProps(nextProps) {if (!this.state.isVisible && nextProps.isVisible) {this.setState({ isVisible: true, showContent: true });}if (this.props.animationIn !== nextProps.animationIn || this.props.animationOut !== nextProps.animationOut) {this.buildAnimations(nextProps);}if (this.props.backdropOpacity !== nextProps.backdropOpacity && this.backdropRef) {this.backdropRef.transitionTo({ opacity: nextProps.backdropOpacity }, this.props.backdropTransitionInTiming);}} }, { key: "componentDidMount", value: function componentDidMount() {if (this.state.isVisible) {this.open();}_reactNative.DeviceEventEmitter.addListener("didUpdateDimensions", this.handleDimensionsUpdate);} }, { key: "UNSAFE_componentWillUnmount", value: function UNSAFE_componentWillUnmount() {_reactNative.DeviceEventEmitter.removeListener("didUpdateDimensions", this.handleDimensionsUpdate);} }, { key: "componentDidUpdate", value: function componentDidUpdate(prevProps, prevState) {if (this.props.isVisible && !prevProps.isVisible) {this.open();} else if (!this.props.isVisible && prevProps.isVisible) {this.close();}} }, { key: "render", value: function render()
+
+    {var _this2 = this;var _this$props =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      this.props,animationIn = _this$props.animationIn,animationInTiming = _this$props.animationInTiming,animationOut = _this$props.animationOut,animationOutTiming = _this$props.animationOutTiming,avoidKeyboard = _this$props.avoidKeyboard,backdropColor = _this$props.backdropColor,backdropOpacity = _this$props.backdropOpacity,backdropTransitionInTiming = _this$props.backdropTransitionInTiming,backdropTransitionOutTiming = _this$props.backdropTransitionOutTiming,children = _this$props.children,deviceHeightProp = _this$props.deviceHeight,deviceWidthProp = _this$props.deviceWidth,isVisible = _this$props.isVisible,onModalShow = _this$props.onModalShow,onBackdropPress = _this$props.onBackdropPress,onBackButtonPress = _this$props.onBackButtonPress,useNativeDriver = _this$props.useNativeDriver,style = _this$props.style,otherProps = _objectWithoutProperties(_this$props, ["animationIn", "animationInTiming", "animationOut", "animationOutTiming", "avoidKeyboard", "backdropColor", "backdropOpacity", "backdropTransitionInTiming", "backdropTransitionOutTiming", "children", "deviceHeight", "deviceWidth", "isVisible", "onModalShow", "onBackdropPress", "onBackButtonPress", "useNativeDriver", "style"]);
+      var deviceWidth = deviceWidthProp || this.state.deviceWidth;
+      var deviceHeight = deviceHeightProp || this.state.deviceHeight;
+
+      var computedStyle = [
+      { margin: deviceWidth * 0.05, transform: [{ translateY: 0 }] },
+      _indexStyle.default.content,
+      style];
+
+
+      var panHandlers = {};
+      var panPosition = {};
+      if (this.state.isSwipeable) {
+        panHandlers = _objectSpread({}, this.panResponder.panHandlers);
+        panPosition = this.state.pan.getLayout();
+      }
+
+      var _children =
+      this.props.hideModalContentWhileAnimating &&
+      this.props.useNativeDriver &&
+      !this.state.showContent ?
+      _react.default.createElement(_reactNativeAnimatable.View, { __source: { fileName: _jsxFileName, lineNumber: 450 } }) :
+
+      children;
+
+      var containerView =
+      _react.default.createElement(_reactNativeAnimatable.View, _extends({},
+      panHandlers, {
+        ref: function ref(_ref2) {return _this2.contentRef = _ref2;},
+        style: [panPosition, computedStyle],
+        pointerEvents: "box-none",
+        useNativeDriver: useNativeDriver },
+      otherProps, { __source: { fileName: _jsxFileName, lineNumber: 455 } }),
+
+      _children);
+
+
+
+      return (
+        _react.default.createElement(_reactNative.Modal, _extends({
+          transparent: true,
+          animationType: "none",
+          visible: this.state.isVisible,
+          onRequestClose: onBackButtonPress },
+        otherProps, { __source: { fileName: _jsxFileName, lineNumber: 468 } }),
+
+        _react.default.createElement(_reactNative.TouchableWithoutFeedback, { onPress: onBackdropPress, __source: { fileName: _jsxFileName, lineNumber: 475 } },
+        _react.default.createElement(_reactNativeAnimatable.View, {
+          ref: function ref(_ref3) {return _this2.backdropRef = _ref3;},
+          useNativeDriver: useNativeDriver,
+          style: [
+          _indexStyle.default.backdrop,
+          {
+            backgroundColor: this.state.showContent ?
+            backdropColor :
+            "transparent",
+            width: deviceWidth,
+            height: deviceHeight }], __source: { fileName: _jsxFileName, lineNumber: 476 } })),
+
+
+
+
+
+        avoidKeyboard &&
+        _react.default.createElement(_reactNative.KeyboardAvoidingView, {
+          behavior: _reactNative.Platform.OS === "ios" ? "padding" : null,
+          pointerEvents: "box-none",
+          style: computedStyle.concat([{ margin: 0 }]), __source: { fileName: _jsxFileName, lineNumber: 493 } },
+
+        containerView),
+
+
+
+        !avoidKeyboard && containerView));
+
+
+    } }]);return ReactNativeModal;}(_react.Component);exports.ReactNativeModal = ReactNativeModal;ReactNativeModal.propTypes = { animationIn: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.object]), animationInTiming: _propTypes.default.number, animationOut: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.object]), animationOutTiming: _propTypes.default.number, avoidKeyboard: _propTypes.default.bool, backdropColor: _propTypes.default.string, backdropOpacity: _propTypes.default.number, backdropTransitionInTiming: _propTypes.default.number, backdropTransitionOutTiming: _propTypes.default.number, children: _propTypes.default.node.isRequired, deviceHeight: _propTypes.default.number, deviceWidth: _propTypes.default.number, isVisible: _propTypes.default.bool.isRequired, hideModalContentWhileAnimating: _propTypes.default.bool, onModalShow: _propTypes.default.func, onModalHide: _propTypes.default.func, onBackButtonPress: _propTypes.default.func, onBackdropPress: _propTypes.default.func, onSwipe: _propTypes.default.func, swipeThreshold: _propTypes.default.number, swipeDirection: _propTypes.default.oneOf(["up", "down", "left", "right"]), useNativeDriver: _propTypes.default.bool, style: _propTypes.default.any, scrollTo: _propTypes.default.func, scrollOffset: _propTypes.default.number, scrollOffsetMax: _propTypes.default.number, supportedOrientations: _propTypes.default.arrayOf(_propTypes.default.oneOf(["portrait", "portrait-upside-down", "landscape", "landscape-left", "landscape-right"])) };ReactNativeModal.defaultProps = { animationIn: "slideInUp", animationInTiming: 300, animationOut: "slideOutDown", animationOutTiming: 300, avoidKeyboard: false, backdropColor: "black", backdropOpacity: 0.7, backdropTransitionInTiming: 300, backdropTransitionOutTiming: 300, onModalShow: function onModalShow() {return null;}, deviceHeight: null, deviceWidth: null, onModalHide: function onModalHide() {return null;}, isVisible: false, hideModalContentWhileAnimating: false, onBackdropPress: function onBackdropPress() {return null;}, onBackButtonPress: function onBackButtonPress() {return null;}, swipeThreshold: 100, useNativeDriver: false, scrollTo: null, scrollOffset: 0, scrollOffsetMax: 0, supportedOrientations: ["portrait", "landscape"] };var _default =
+
+
+ReactNativeModal;exports.default = _default;

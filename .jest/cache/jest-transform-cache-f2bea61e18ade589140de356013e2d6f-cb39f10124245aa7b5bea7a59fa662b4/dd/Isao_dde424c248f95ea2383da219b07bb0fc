@@ -1,0 +1,188 @@
+44497834ade38b962eea147e4dd2c278
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _react = _interopRequireDefault(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _reactNative = require("react-native");
+
+
+
+
+
+
+
+
+var _BaseInput = _interopRequireDefault(require("./BaseInput"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\node_modules\\react-native-textinput-effects\\lib\\Isao.js";function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _extends() {_extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};return _extends.apply(this, arguments);}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}
+
+var LABEL_HEIGHT = 24;
+var PADDING = 16;var
+
+Isao = function (_BaseInput) {_inherits(Isao, _BaseInput);function Isao() {_classCallCheck(this, Isao);return _possibleConstructorReturn(this, _getPrototypeOf(Isao).apply(this, arguments));}_createClass(Isao, [{ key: "render", value: function render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {var _this$props =
+
+
+
+
+
+
+
+
+      this.props,label = _this$props.label,containerStyle = _this$props.style,inputHeight = _this$props.height,inputStyle = _this$props.inputStyle,labelStyle = _this$props.labelStyle,activeColor = _this$props.activeColor,passiveColor = _this$props.passiveColor;var _this$state =
+
+
+
+
+      this.state,width = _this$state.width,focusedAnim = _this$state.focusedAnim,value = _this$state.value;
+
+      return (
+        _react.default.createElement(_reactNative.View, {
+          style: [
+          containerStyle,
+          {
+            height: inputHeight + LABEL_HEIGHT }],
+
+
+          onLayout: this._onLayout, __source: { fileName: _jsxFileName, lineNumber: 54 } },
+
+        _react.default.createElement(_reactNative.View, {
+          style: [
+          styles.inputContainer,
+          {
+            height: inputHeight,
+            borderBottomColor: passiveColor }], __source: { fileName: _jsxFileName, lineNumber: 63 } },
+
+
+
+        _react.default.createElement(_reactNative.TextInput, _extends({
+          ref: "input" },
+        this.props, {
+          style: [
+          styles.textInput,
+          inputStyle,
+          {
+            width: width,
+            height: inputHeight }],
+
+
+          value: value,
+          onBlur: this._onBlur,
+          onChange: this._onChange,
+          onFocus: this._onFocus,
+          underlineColorAndroid: 'transparent', __source: { fileName: _jsxFileName, lineNumber: 72 } }))),
+
+
+        _react.default.createElement(_reactNative.TouchableWithoutFeedback, { onPress: this.focus, __source: { fileName: _jsxFileName, lineNumber: 90 } },
+        _react.default.createElement(_reactNative.View, {
+          style: {
+            height: LABEL_HEIGHT,
+            width: width }, __source: { fileName: _jsxFileName, lineNumber: 91 } },
+
+
+
+        _react.default.createElement(_reactNative.Animated.Text, {
+          style: [
+          styles.label,
+          labelStyle,
+          {
+            width: width,
+            opacity: focusedAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [1, 0] }),
+
+            bottom: focusedAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, LABEL_HEIGHT] }),
+
+            color: passiveColor }], __source: { fileName: _jsxFileName, lineNumber: 98 } },
+
+
+
+        label),
+
+
+        _react.default.createElement(_reactNative.Animated.Text, {
+          style: [
+          styles.label,
+          labelStyle,
+          {
+            opacity: focusedAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 1] }),
+
+            bottom: focusedAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [LABEL_HEIGHT * -1, 0] }),
+
+            color: activeColor }], __source: { fileName: _jsxFileName, lineNumber: 119 } },
+
+
+
+        label))),
+
+
+
+        _react.default.createElement(_reactNative.Animated.View, {
+          style: [
+          styles.border,
+          {
+            height: focusedAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 8] }),
+
+            width: width,
+            backgroundColor: activeColor }], __source: { fileName: _jsxFileName, lineNumber: 140 } })));
+
+
+
+
+
+    } }]);return Isao;}(_BaseInput.default);exports.default = Isao;Isao.propTypes = { passiveColor: _propTypes.default.string, activeColor: _propTypes.default.string, height: _propTypes.default.number };Isao.defaultProps = { activeColor: 'red', passiveColor: 'white', height: 48, easing: _reactNative.Easing.bezier(0.2, 1, 0.3, 1) };
+
+
+var styles = _reactNative.StyleSheet.create({
+  inputContainer: {
+    borderBottomWidth: 2 },
+
+  labelContainer: {
+    paddingLeft: PADDING,
+    height: LABEL_HEIGHT },
+
+  label: {
+    position: 'absolute',
+    height: LABEL_HEIGHT,
+    left: PADDING,
+    paddingTop: 4,
+    backgroundColor: 'transparent',
+    fontFamily: 'Arial',
+    fontSize: 14,
+    fontWeight: 'bold' },
+
+  textInput: {
+    paddingHorizontal: PADDING,
+    color: '#afb3b8',
+    fontSize: 18,
+    fontWeight: 'bold',
+    padding: 0 },
+
+  border: {
+    position: 'absolute',
+    bottom: LABEL_HEIGHT,
+    left: 0,
+    right: 0 } });

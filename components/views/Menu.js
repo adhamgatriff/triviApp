@@ -24,9 +24,12 @@ type State = {
  * Menu where to choose the category to play
  */
 export default class Menu extends React.Component <Props, State> {
-  state = {
-    isOptionModalVisible: false,
-    categorySelected: 'any',
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      isOptionModalVisible: false,
+      categorySelected: 'any',
+    };
   }
 
   /**

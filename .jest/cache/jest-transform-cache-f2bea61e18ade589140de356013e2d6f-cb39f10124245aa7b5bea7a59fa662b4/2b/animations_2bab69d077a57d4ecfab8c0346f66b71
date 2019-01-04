@@ -1,0 +1,34 @@
+8b1862d0da7eb29b90478c829076136a
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.slideOutRight = exports.slideOutLeft = exports.slideOutUp = exports.slideOutDown = exports.slideInRight = exports.slideInLeft = exports.slideInUp = exports.slideInDown = void 0;
+
+
+
+var _reactNative = require("react-native");function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _Dimensions$get =
+_reactNative.Dimensions.get("window"),height = _Dimensions$get.height,width = _Dimensions$get.width;
+
+var makeSlideTranslation = function makeSlideTranslation(translationType, fromValue, toValue) {
+  return {
+    from: _defineProperty({},
+    translationType, fromValue),
+
+    to: _defineProperty({},
+    translationType, toValue) };
+
+
+};
+
+var slideInDown = makeSlideTranslation("translateY", -height, 0);exports.slideInDown = slideInDown;
+
+var slideInUp = makeSlideTranslation("translateY", height, 0);exports.slideInUp = slideInUp;
+
+var slideInLeft = makeSlideTranslation("translateX", -width, 0);exports.slideInLeft = slideInLeft;
+
+var slideInRight = makeSlideTranslation("translateX", width, 0);exports.slideInRight = slideInRight;
+
+var slideOutDown = makeSlideTranslation("translateY", 0, height);exports.slideOutDown = slideOutDown;
+
+var slideOutUp = makeSlideTranslation("translateY", 0, -height);exports.slideOutUp = slideOutUp;
+
+var slideOutLeft = makeSlideTranslation("translateX", 0, -width);exports.slideOutLeft = slideOutLeft;
+
+var slideOutRight = makeSlideTranslation("translateX", 0, width);exports.slideOutRight = slideOutRight;

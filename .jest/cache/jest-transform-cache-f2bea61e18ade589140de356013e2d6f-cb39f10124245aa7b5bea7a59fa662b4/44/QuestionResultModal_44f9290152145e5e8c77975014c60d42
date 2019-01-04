@@ -1,0 +1,91 @@
+257a88b25cf7656e7b4499a5be701e6e
+"use strict";var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var React = _interopRequireWildcard(require("react"));
+var _reactNative = require("react-native");
+
+
+var _reactNativeModal = _interopRequireDefault(require("react-native-modal"));
+var _Colors = _interopRequireDefault(require("../../resources/Colors"));
+var _Button = _interopRequireDefault(require("../global/Button"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\components\\modal\\QuestionResultModal.js";
+
+
+
+
+
+
+
+
+
+
+
+var QuestionResultModal = function QuestionResultModal(props) {var
+
+  isVisible =
+  props.isVisible,isCorrect = props.isCorrect,correctAnswer = props.correctAnswer,nextQuestion = props.nextQuestion;
+
+  return (
+    React.createElement(_reactNative.View, { __source: { fileName: _jsxFileName, lineNumber: 26 } },
+    React.createElement(_reactNativeModal.default, { isVisible: isVisible, __source: { fileName: _jsxFileName, lineNumber: 27 } },
+    React.createElement(_reactNative.View, { style: styles.dialogStyle, __source: { fileName: _jsxFileName, lineNumber: 28 } },
+    React.createElement(_reactNative.View, { style: styles.titleWrapper, __source: { fileName: _jsxFileName, lineNumber: 29 } },
+    React.createElement(_reactNative.Text, { style: styles.title, __source: { fileName: _jsxFileName, lineNumber: 30 } }, isCorrect ? 'Correct!!' : 'Error!!')),
+
+    !isCorrect &&
+    React.createElement(_reactNative.View, { __source: { fileName: _jsxFileName, lineNumber: 33 } },
+    React.createElement(_reactNative.Text, { style: styles.dialogText, __source: { fileName: _jsxFileName, lineNumber: 34 } }, "The correct answer is"),
+    React.createElement(_reactNative.Text, { style: styles.correctAnswer, __source: { fileName: _jsxFileName, lineNumber: 35 } },
+    correctAnswer)),
+
+
+
+    React.createElement(_reactNative.View, { style: styles.container, __source: { fileName: _jsxFileName, lineNumber: 40 } },
+    React.createElement(_Button.default, { text: "NEXT QUESTION", action: nextQuestion, __source: { fileName: _jsxFileName, lineNumber: 41 } }))))));
+
+
+
+
+
+};
+
+QuestionResultModal.defaultProps = {
+  correctAnswer: '' };
+
+
+var styles = _reactNative.StyleSheet.create({
+  dialogStyle: {
+    backgroundColor: _Colors.default.yellow,
+    borderRadius: 18 },
+
+  container: {
+    paddingHorizontal: 10,
+    marginTop: 0,
+    paddingBottom: 5 },
+
+  titleWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 5,
+    marginTop: 5,
+    flexDirection: 'row' },
+
+  title: {
+    flex: 1,
+    fontFamily: 'BreeSerif',
+    fontSize: 26,
+    color: _Colors.default.black,
+    textAlign: 'center' },
+
+  dialogText: {
+    fontSize: 18,
+    color: _Colors.default.black,
+    textAlign: 'center' },
+
+  correctAnswer: {
+    fontSize: 18,
+    color: _Colors.default.red,
+    textAlign: 'center',
+    fontWeight: 'bold' } });var _default =
+
+
+
+QuestionResultModal;exports.default = _default;

@@ -1,0 +1,140 @@
+60174b523ae81adbb3aade7bc4ce7454
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+var React = _interopRequireWildcard(require("react"));
+var _reactNative = require("react-native");
+
+
+var _Colors = _interopRequireDefault(require("../../resources/Colors"));
+var _data = require("../../resources/data");
+var _Button = _interopRequireDefault(require("../global/Button"));
+var _OptionModal = _interopRequireDefault(require("../modal/OptionModal"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\components\\views\\Menu.js";var
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Menu = function (_React$Component) {(0, _inherits2.default)(Menu, _React$Component);
+  function Menu(props) {var _this;(0, _classCallCheck2.default)(this, Menu);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Menu).call(this, props));_this.
+
+
+
+
+
+
+
+
+
+    toggleOptionModal = function () {var
+      isOptionModalVisible = _this.state.isOptionModalVisible;
+      return _this.setState({ isOptionModalVisible: !isOptionModalVisible });
+    };_this.
+
+
+
+
+
+    setCategorySelected = function (categorySelected) {return _this.setState({ categorySelected: categorySelected });};_this.
+
+
+
+
+
+    handleCategorySelection = function (value) {
+      _this.setCategorySelected(value);
+      _this.toggleOptionModal();
+    };_this.
+
+
+
+
+
+
+    renderCategories = function (_ref) {var value = _ref.value,label = _ref.label;return (
+        React.createElement(_Button.default, {
+          buttonStyle: styles.menuButton,
+          textStyle: styles.menuButtonText,
+          text: label,
+          action: function action() {return _this.handleCategorySelection(value);}, __source: { fileName: _jsxFileName, lineNumber: 64 } }));};_this.state = { isOptionModalVisible: false, categorySelected: 'any' };return _this;}(0, _createClass2.default)(Menu, [{ key: "render", value: function render()
+
+
+
+    {var _this2 = this;var
+      navigation = this.props.navigation;var _this$state =
+      this.state,isOptionModalVisible = _this$state.isOptionModalVisible,categorySelected = _this$state.categorySelected;
+
+      return (
+        React.createElement(_reactNative.View, { style: styles.wrapper, __source: { fileName: _jsxFileName, lineNumber: 77 } },
+        React.createElement(_reactNative.View, { style: styles.titleWrapper, __source: { fileName: _jsxFileName, lineNumber: 78 } },
+        React.createElement(_Button.default, {
+          buttonStyle: styles.backButton,
+          icon: "md-arrow-back",
+          iconColor: _Colors.default.gray,
+          action: function action() {return navigation.goBack();}, __source: { fileName: _jsxFileName, lineNumber: 79 } }),
+
+        React.createElement(_reactNative.Text, { style: styles.title, __source: { fileName: _jsxFileName, lineNumber: 85 } }, "Choose one category")),
+
+        React.createElement(_reactNative.FlatList, {
+          data: _data.categories,
+          extraData: this.state,
+          keyExtractor: function keyExtractor(item) {return item.value;},
+          renderItem: function renderItem(_ref2) {var item = _ref2.item;return _this2.renderCategories(item);}, __source: { fileName: _jsxFileName, lineNumber: 87 } }),
+
+        React.createElement(_OptionModal.default, {
+          isVisible: isOptionModalVisible,
+          toggleModal: this.toggleOptionModal,
+          categorySelected: categorySelected,
+          navigation: navigation, __source: { fileName: _jsxFileName, lineNumber: 93 } })));
+
+
+
+    } }]);return Menu;}(React.Component);exports.default = Menu;
+
+
+var styles = _reactNative.StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    backgroundColor: _Colors.default.black },
+
+  titleWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 5,
+    marginVertical: 5,
+    flexDirection: 'row' },
+
+  title: {
+    flex: 1,
+    fontFamily: 'BreeSerif',
+    fontSize: 26,
+    color: _Colors.default.gray,
+    textAlign: 'center' },
+
+  backButton: {
+    backgroundColor: 'transparent' },
+
+  menuButton: {
+    flex: 1,
+    width: '90%',
+    height: 60,
+    marginHorizontal: 5,
+    marginVertical: 10,
+    alignSelf: 'center',
+    padding: 5 },
+
+  menuButtonText: {
+    fontFamily: 'BreeSerif',
+    letterSpacing: 0,
+    textAlign: 'center',
+    fontSize: 16 } });

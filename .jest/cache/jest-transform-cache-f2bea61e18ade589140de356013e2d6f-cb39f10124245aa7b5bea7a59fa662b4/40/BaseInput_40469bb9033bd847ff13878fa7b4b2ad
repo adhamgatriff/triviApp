@@ -1,0 +1,135 @@
+9e6e7bfb9f215781b35d027a79bc16d5
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _react = require("react");
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactNative = require("react-native");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}var
+
+BaseInput = function (_Component) {_inherits(BaseInput, _Component);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function BaseInput(props, context) {var _this;_classCallCheck(this, BaseInput);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BaseInput).call(this, props, context));
+
+    _this._onLayout = _this._onLayout.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this._onChange = _this._onChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this._onBlur = _this._onBlur.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this._onFocus = _this._onFocus.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.focus = _this.focus.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+
+    var value = props.value || props.defaultValue;
+
+    _this.state = {
+      value: value,
+      focusedAnim: new _reactNative.Animated.Value(value ? 1 : 0) };return _this;
+
+  }_createClass(BaseInput, [{ key: "componentWillReceiveProps", value: function componentWillReceiveProps(
+
+    newProps) {
+      var newValue = newProps.value;
+      if (newProps.hasOwnProperty('value') && newValue !== this.state.value) {
+        this.setState({
+          value: newValue });
+
+
+
+
+        var isFocused = this.refs.input.isFocused();
+        if (!isFocused) {
+          var isActive = Boolean(newValue);
+          if (isActive !== this.isActive) {
+            this._toggle(isActive);
+          }
+        }
+      }
+    } }, { key: "_onLayout", value: function _onLayout(
+
+    event) {
+      this.setState({
+        width: event.nativeEvent.layout.width });
+
+    } }, { key: "_onChange", value: function _onChange(
+
+    event) {
+      this.setState({
+        value: event.nativeEvent.text });
+
+
+      var onChange = this.props.onChange;
+      if (onChange) {
+        onChange(event);
+      }
+    } }, { key: "_onBlur", value: function _onBlur(
+
+    event) {
+      if (!this.state.value) {
+        this._toggle(false);
+      }
+
+      var onBlur = this.props.onBlur;
+      if (onBlur) {
+        onBlur(event);
+      }
+    } }, { key: "_onFocus", value: function _onFocus(
+
+    event) {
+      this._toggle(true);
+
+      var onFocus = this.props.onFocus;
+      if (onFocus) {
+        onFocus(event);
+      }
+    } }, { key: "_toggle", value: function _toggle(
+
+    isActive) {var _this$props =
+      this.props,animationDuration = _this$props.animationDuration,easing = _this$props.easing,useNativeDriver = _this$props.useNativeDriver;
+      this.isActive = isActive;
+      _reactNative.Animated.timing(this.state.focusedAnim, {
+        toValue: isActive ? 1 : 0,
+        duration: animationDuration,
+        easing: easing,
+        useNativeDriver: useNativeDriver }).
+      start();
+    } }, { key: "inputRef", value: function inputRef()
+
+
+
+    {
+      return this.refs.input;
+    } }, { key: "focus", value: function focus()
+
+    {
+      if (this.props.editable !== false) {
+        this.inputRef().focus();
+      }
+    } }, { key: "blur", value: function blur()
+
+    {
+      this.inputRef().blur();
+    } }, { key: "isFocused", value: function isFocused()
+
+    {
+      return this.inputRef().isFocused();
+    } }, { key: "clear", value: function clear()
+
+    {
+      this.inputRef().clear();
+    } }]);return BaseInput;}(_react.Component);exports.default = BaseInput;BaseInput.propTypes = { label: _propTypes.default.string, value: _propTypes.default.string, defaultValue: _propTypes.default.string, style: _reactNative.ViewPropTypes ? _reactNative.ViewPropTypes.style : _reactNative.View.propTypes.style, inputStyle: _reactNative.Text.propTypes.style, labelStyle: _reactNative.Text.propTypes.style, easing: _propTypes.default.func, animationDuration: _propTypes.default.number, useNativeDriver: _propTypes.default.bool, editable: _propTypes.default.bool, onBlur: _propTypes.default.func, onFocus: _propTypes.default.func, onChange: _propTypes.default.func };

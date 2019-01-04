@@ -44,11 +44,15 @@ type Props = {
  * Option modal
  */
 export default class OptionModal extends React.Component <Props, State> {
-  state = {
-    username: 'User',
-    difficulty: 'easy',
-    questionNumber: '10',
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      username: 'User',
+      difficulty: 'easy',
+      questionNumber: '10',
+    };
   }
+
 
   /**
    * Set username in the state.

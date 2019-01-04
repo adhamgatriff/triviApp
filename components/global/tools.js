@@ -41,3 +41,13 @@ export const storeData = async (data: {user: string, points: number }) : Promise
     Alert.alert('Notification', 'An error has occurred saving the data.', [{ text: 'OK' }], { cancelable: false });
   }
 };
+
+/**
+ * Shuffle the correct answer with the incorrects.
+ * @param  {string} correctAnsw
+ * @param  {Array<string>} incorrectAnsw
+ */
+export const shuffleAnswers = (correctAnsw: string, incorrectAnsw: Array<string>): Array<string> => [...incorrectAnsw, correctAnsw]
+  .map((a: any) => [Math.random(), a])
+  .sort((a: any, b: any) => a[0] - b[0])
+  .map((a: any) => a[1]);

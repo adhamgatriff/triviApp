@@ -1,0 +1,26 @@
+c2f776e67b1835ad548f55153fba6122
+"use strict";var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var React = _interopRequireWildcard(require("react"));
+var _reactNative = require("react-native");
+
+
+var _Colors = _interopRequireDefault(require("../../resources/Colors"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\components\\global\\Spinner.js";
+
+
+var CustomSpinner = function CustomSpinner() {return (
+    React.createElement(_reactNative.View, { style: styles.wrapper, __source: { fileName: _jsxFileName, lineNumber: 10 } },
+    React.createElement(_reactNative.ActivityIndicator, { size: "large", color: _Colors.default.red, __source: { fileName: _jsxFileName, lineNumber: 11 } }),
+    React.createElement(_reactNative.Text, { style: { fontSize: 20, color: _Colors.default.yellow }, __source: { fileName: _jsxFileName, lineNumber: 12 } }, "Loading")));};
+
+
+
+var styles = _reactNative.StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: _Colors.default.black } });var _default =
+
+
+
+CustomSpinner;exports.default = _default;

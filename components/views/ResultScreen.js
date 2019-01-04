@@ -37,6 +37,11 @@ type Props = {
  * Show the points reached
  */
 export default class ResultScreen extends React.Component <Props> {
+  // eslint-disable-next-line
+    constructor(props: Props) {
+    super(props);
+  }
+
   /**
    * Back to the menu button handler.
    */

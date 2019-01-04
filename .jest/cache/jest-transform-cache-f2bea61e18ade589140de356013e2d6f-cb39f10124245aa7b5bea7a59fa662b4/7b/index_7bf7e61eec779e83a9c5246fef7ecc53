@@ -1,0 +1,523 @@
+34a6e0a7aa0ea4e404c3784a0865b3bc
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _react = _interopRequireWildcard(require("react"));
+var _reactNative = require("react-native");
+
+
+
+
+
+
+
+
+
+
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _lodash = _interopRequireDefault(require("lodash.isequal"));var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\node_modules\\react-native-picker-select\\src\\index.js";function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {};if (desc.get || desc.set) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}}newObj.default = obj;return newObj;}}function _extends() {_extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};return _extends.apply(this, arguments);}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}var
+
+RNPickerSelect = function (_PureComponent) {_inherits(RNPickerSelect, _PureComponent);_createClass(RNPickerSelect, null, [{ key: "handlePlaceholder", value: function handlePlaceholder(_ref)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {var placeholder = _ref.placeholder;
+      if ((0, _lodash.default)(placeholder, {})) {
+        return [];
+      }
+      return [placeholder];
+    } }, { key: "getSelectedItem", value: function getSelectedItem(_ref2)
+
+    {var items = _ref2.items,key = _ref2.key,value = _ref2.value;
+      var idx = items.findIndex(function (item) {
+        if (item.key && key) {
+          return (0, _lodash.default)(item.key, key);
+        }
+        return (0, _lodash.default)(item.value, value);
+      });
+      if (idx === -1) {
+        idx = 0;
+      }
+      return {
+        selectedItem: items[idx],
+        idx: idx };
+
+    } }, { key: "getDerivedStateFromProps", value: function getDerivedStateFromProps(
+
+    nextProps, prevState) {
+
+      var itemsChanged = !(0, _lodash.default)(prevState.items, nextProps.items);
+
+      var newItems = RNPickerSelect.handlePlaceholder({
+        placeholder: nextProps.placeholder }).
+      concat(nextProps.items);var _RNPickerSelect$getSe =
+      RNPickerSelect.getSelectedItem({
+        items: newItems,
+        key: nextProps.itemKey,
+        value: nextProps.value }),selectedItem = _RNPickerSelect$getSe.selectedItem,idx = _RNPickerSelect$getSe.idx;
+
+      var selectedItemChanged =
+      !(0, _lodash.default)(nextProps.value, undefined) && !(0, _lodash.default)(prevState.selectedItem, selectedItem);
+
+      if (itemsChanged || selectedItemChanged) {
+        if (selectedItemChanged) {
+          nextProps.onValueChange(selectedItem.value, idx);
+        }
+        return {
+          items: itemsChanged ? newItems : prevState.items,
+          selectedItem: selectedItemChanged ? selectedItem : prevState.selectedItem };
+
+      }
+
+      return null;
+    } }]);
+
+  function RNPickerSelect(props) {var _this;_classCallCheck(this, RNPickerSelect);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RNPickerSelect).call(this, props));
+
+    var items = RNPickerSelect.handlePlaceholder({
+      placeholder: _this.props.placeholder }).
+    concat(_this.props.items);var _RNPickerSelect$getSe2 =
+
+    RNPickerSelect.getSelectedItem({
+      items: items,
+      key: _this.props.itemKey,
+      value: _this.props.value }),selectedItem = _RNPickerSelect$getSe2.selectedItem;
+
+
+    _this.state = {
+      items: items,
+      selectedItem: selectedItem,
+      showPicker: false,
+      animationType: undefined };
+
+
+    _this.onUpArrow = _this.onUpArrow.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.onDownArrow = _this.onDownArrow.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.onValueChange = _this.onValueChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.setInputRef = _this.setInputRef.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.togglePicker = _this.togglePicker.bind(_assertThisInitialized(_assertThisInitialized(_this)));return _this;
+  }_createClass(RNPickerSelect, [{ key: "onUpArrow", value: function onUpArrow()
+
+
+
+    {var
+      onUpArrow = this.props.onUpArrow;
+
+      this.togglePicker();
+      setTimeout(onUpArrow);
+    } }, { key: "onDownArrow", value: function onDownArrow()
+
+    {var
+      onDownArrow = this.props.onDownArrow;
+
+      this.togglePicker();
+      setTimeout(onDownArrow);
+    } }, { key: "onValueChange", value: function onValueChange(
+
+    value, index) {var
+      onValueChange = this.props.onValueChange;
+
+      onValueChange(value, index);
+
+      this.setState({
+        selectedItem: this.state.items[index] });
+
+    } }, { key: "setInputRef", value: function setInputRef(
+
+    ref) {
+      this.inputRef = ref;
+    } }, { key: "getPlaceholderStyle", value: function getPlaceholderStyle()
+
+    {var _this$props =
+      this.props,placeholder = _this$props.placeholder,placeholderTextColor = _this$props.placeholderTextColor;
+
+      if (!(0, _lodash.default)(placeholder, {}) && this.state.selectedItem.label === placeholder.label) {
+        return {
+          color: placeholderTextColor };
+
+      }
+      return {};
+    } }, { key: "togglePicker", value: function togglePicker()
+
+    {var animate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;var _this$props2 =
+      this.props,modalProps = _this$props2.modalProps,disabled = _this$props2.disabled;
+
+      if (disabled) {
+        return;
+      }
+
+      var animationType =
+      modalProps && modalProps.animationType ? modalProps.animationType : 'slide';
+
+      this.setState({
+        animationType: animate ? animationType : undefined,
+        showPicker: !this.state.showPicker });
+
+
+      if (!this.state.showPicker && this.inputRef) {
+        this.inputRef.focus();
+        this.inputRef.blur();
+      }
+    } }, { key: "renderPickerItems", value: function renderPickerItems()
+
+    {
+      return this.state.items.map(function (item) {
+        return (
+          _react.default.createElement(_reactNative.Picker.Item, {
+            label: item.label,
+            value: item.value,
+            key: item.key || item.label,
+            color: item.color, __source: { fileName: _jsxFileName, lineNumber: 227 } }));
+
+
+      });
+    } }, { key: "renderDoneBar", value: function renderDoneBar()
+
+    {var _this2 = this;var _this$props3 =
+      this.props,doneText = _this$props3.doneText,hideDoneBar = _this$props3.hideDoneBar,onUpArrow = _this$props3.onUpArrow,onDownArrow = _this$props3.onDownArrow,onDonePress = _this$props3.onDonePress,style = _this$props3.style;
+
+      if (hideDoneBar) {
+        return null;
+      }
+
+      return (
+        _react.default.createElement(_reactNative.View, { style: [defaultStyles.modalViewMiddle, style.modalViewMiddle], testID: "done_bar", __source: { fileName: _jsxFileName, lineNumber: 245 } },
+        _react.default.createElement(_reactNative.View, { style: [defaultStyles.chevronContainer, style.chevronContainer], __source: { fileName: _jsxFileName, lineNumber: 246 } },
+        _react.default.createElement(_reactNative.TouchableOpacity, {
+          activeOpacity: onUpArrow ? 0.5 : 1,
+          onPress: onUpArrow ? this.onUpArrow : null, __source: { fileName: _jsxFileName, lineNumber: 247 } },
+
+        _react.default.createElement(_reactNative.View, {
+          style: [
+          defaultStyles.chevron,
+          style.chevron,
+          defaultStyles.chevronUp,
+          style.chevronUp,
+          onUpArrow ? [defaultStyles.chevronActive, style.chevronActive] : {}], __source: { fileName: _jsxFileName, lineNumber: 251 } })),
+
+
+
+        _react.default.createElement(_reactNative.View, { style: { marginHorizontal: 10 }, __source: { fileName: _jsxFileName, lineNumber: 261 } }),
+        _react.default.createElement(_reactNative.TouchableOpacity, {
+          activeOpacity: onDownArrow ? 0.5 : 1,
+          onPress: onDownArrow ? this.onDownArrow : null, __source: { fileName: _jsxFileName, lineNumber: 262 } },
+
+        _react.default.createElement(_reactNative.View, {
+          style: [
+          defaultStyles.chevron,
+          style.chevron,
+          defaultStyles.chevronDown,
+          style.chevronDown,
+          onDownArrow ?
+          [defaultStyles.chevronActive, style.chevronActive] :
+          {}], __source: { fileName: _jsxFileName, lineNumber: 266 } }))),
+
+
+
+
+        _react.default.createElement(_reactNative.TouchableWithoutFeedback, {
+          onPress: function onPress() {
+            _this2.togglePicker(true);
+            if (onDonePress) {
+              onDonePress();
+            }
+          },
+          hitSlop: { top: 2, right: 2, bottom: 2, left: 2 },
+          testID: "done_button", __source: { fileName: _jsxFileName, lineNumber: 279 } },
+
+        _react.default.createElement(_reactNative.View, { testID: "needed_for_touchable", __source: { fileName: _jsxFileName, lineNumber: 289 } },
+        _react.default.createElement(_reactNative.Text, { style: [defaultStyles.done, style.done], __source: { fileName: _jsxFileName, lineNumber: 290 } }, doneText)))));
+
+
+
+
+    } }, { key: "renderIcon", value: function renderIcon()
+
+    {var _this$props4 =
+      this.props,hideIcon = _this$props4.hideIcon,style = _this$props4.style;
+
+      if (hideIcon) {
+        return null;
+      }
+
+      return _react.default.createElement(_reactNative.View, { testID: "icon_ios", style: [defaultStyles.icon, style.icon], __source: { fileName: _jsxFileName, lineNumber: 304 } });
+    } }, { key: "renderTextInputOrChildren", value: function renderTextInputOrChildren()
+
+    {var _this$props5 =
+      this.props,children = _this$props5.children,hideIcon = _this$props5.hideIcon,style = _this$props5.style,textInputProps = _this$props5.textInputProps;
+      var containerStyle =
+      _reactNative.Platform.OS === 'ios' ? style.inputIOSContainer : style.inputAndroidContainer;
+
+      if (children) {
+        return (
+          _react.default.createElement(_reactNative.View, { pointerEvents: "box-only", style: containerStyle, __source: { fileName: _jsxFileName, lineNumber: 314 } },
+          children));
+
+
+      }
+      return (
+        _react.default.createElement(_reactNative.View, { pointerEvents: "box-only", style: containerStyle, __source: { fileName: _jsxFileName, lineNumber: 320 } },
+        _react.default.createElement(_reactNative.TextInput, _extends({
+          style: [
+          !hideIcon ? { paddingRight: 30 } : {},
+          _reactNative.Platform.OS === 'ios' ? style.inputIOS : style.inputAndroid,
+          this.getPlaceholderStyle()],
+
+          value: this.state.selectedItem.label,
+          ref: this.setInputRef,
+          editable: false },
+        textInputProps, { __source: { fileName: _jsxFileName, lineNumber: 321 } })),
+
+        this.renderIcon()));
+
+
+    } }, { key: "renderIOS", value: function renderIOS()
+
+    {var _this3 = this;var _this$props6 =
+      this.props,style = _this$props6.style,modalProps = _this$props6.modalProps,pickerProps = _this$props6.pickerProps;
+
+      return (
+        _react.default.createElement(_reactNative.View, { style: [defaultStyles.viewContainer, style.viewContainer], __source: { fileName: _jsxFileName, lineNumber: 341 } },
+        _react.default.createElement(_reactNative.TouchableWithoutFeedback, {
+          onPress: function onPress() {
+            _this3.togglePicker(true);
+          }, __source: { fileName: _jsxFileName, lineNumber: 342 } },
+
+        this.renderTextInputOrChildren()),
+
+        _react.default.createElement(_reactNative.Modal, _extends({
+          testID: "RNPickerSelectModal",
+          visible: this.state.showPicker,
+          transparent: true,
+          animationType: this.state.animationType,
+          supportedOrientations: ['portrait', 'landscape'] },
+
+        modalProps, { __source: { fileName: _jsxFileName, lineNumber: 349 } }),
+
+        _react.default.createElement(_reactNative.TouchableOpacity, {
+          style: [defaultStyles.modalViewTop, style.modalViewTop],
+          onPress: function onPress() {
+            _this3.togglePicker(true);
+          }, __source: { fileName: _jsxFileName, lineNumber: 358 } }),
+
+        this.renderDoneBar(),
+        _react.default.createElement(_reactNative.View, { style: [defaultStyles.modalViewBottom, style.modalViewBottom], __source: { fileName: _jsxFileName, lineNumber: 365 } },
+        _react.default.createElement(_reactNative.Picker, _extends({
+          testID: "RNPickerSelectIOS",
+          onValueChange: this.onValueChange,
+          selectedValue: this.state.selectedItem.value },
+        pickerProps, { __source: { fileName: _jsxFileName, lineNumber: 366 } }),
+
+        this.renderPickerItems())))));
+
+
+
+
+
+    } }, { key: "renderAndroidHeadless", value: function renderAndroidHeadless()
+
+    {var _this$props7 =
+      this.props,disabled = _this$props7.disabled,style = _this$props7.style,pickerProps = _this$props7.pickerProps;
+      return (
+        _react.default.createElement(_reactNative.View, { style: [{ borderWidth: 0 }, style.headlessAndroidContainer], __source: { fileName: _jsxFileName, lineNumber: 383 } },
+        this.renderTextInputOrChildren(),
+        _react.default.createElement(_reactNative.Picker, _extends({
+          style: [defaultStyles.headlessAndroidPicker, style.headlessAndroidPicker],
+          testID: "RNPickerSelectAndroidHeadless",
+          enabled: !disabled,
+          onValueChange: this.onValueChange,
+          selectedValue: this.state.selectedItem.value },
+        pickerProps, { __source: { fileName: _jsxFileName, lineNumber: 385 } }),
+
+        this.renderPickerItems())));
+
+
+
+    } }, { key: "renderAndroid", value: function renderAndroid()
+
+    {var _this$props8 =
+
+
+
+
+
+
+
+      this.props,children = _this$props8.children,disabled = _this$props8.disabled,hideIcon = _this$props8.hideIcon,style = _this$props8.style,pickerProps = _this$props8.pickerProps,useNativeAndroidPickerStyle = _this$props8.useNativeAndroidPickerStyle;
+
+      if (children) {
+        return this.renderAndroidHeadless();
+      }
+
+      if (useNativeAndroidPickerStyle) {
+        return (
+          _react.default.createElement(_reactNative.View, { style: [defaultStyles.viewContainer, style.viewContainer], __source: { fileName: _jsxFileName, lineNumber: 415 } },
+          _react.default.createElement(_reactNative.Picker, _extends({
+            style: [
+            hideIcon ? { backgroundColor: 'transparent' } : {},
+            style.inputAndroid,
+            this.getPlaceholderStyle()],
+
+            testID: "RNPickerSelectAndroid",
+            enabled: !disabled,
+            onValueChange: this.onValueChange,
+            selectedValue: this.state.selectedItem.value },
+          pickerProps, { __source: { fileName: _jsxFileName, lineNumber: 416 } }),
+
+          this.renderPickerItems()),
+
+          _react.default.createElement(_reactNative.View, { style: [defaultStyles.underline, style.underline], __source: { fileName: _jsxFileName, lineNumber: 430 } })));
+
+
+      }
+
+      return (
+        _react.default.createElement(_reactNative.View, { style: [defaultStyles.viewContainer, style.viewContainer], __source: { fileName: _jsxFileName, lineNumber: 436 } },
+        this.renderAndroidHeadless()));
+
+
+    } }, { key: "render", value: function render()
+
+    {
+      return _reactNative.Platform.OS === 'ios' ? this.renderIOS() : this.renderAndroid();
+    } }]);return RNPickerSelect;}(_react.PureComponent);exports.default = RNPickerSelect;RNPickerSelect.propTypes = { onValueChange: _propTypes.default.func.isRequired, items: _propTypes.default.arrayOf(_propTypes.default.shape({ label: _propTypes.default.string.isRequired, value: _propTypes.default.any.isRequired, key: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]), color: _reactNative.ColorPropType })).isRequired, value: _propTypes.default.any, placeholder: _propTypes.default.shape({ label: _propTypes.default.string, value: _propTypes.default.any, key: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]), color: _reactNative.ColorPropType }), disabled: _propTypes.default.bool, itemKey: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]), style: _propTypes.default.shape({}), children: _propTypes.default.any, hideIcon: _propTypes.default.bool, placeholderTextColor: _reactNative.ColorPropType, useNativeAndroidPickerStyle: _propTypes.default.bool, hideDoneBar: _propTypes.default.bool, doneText: _propTypes.default.string, onDonePress: _propTypes.default.func, onUpArrow: _propTypes.default.func, onDownArrow: _propTypes.default.func, modalProps: _propTypes.default.shape({}), textInputProps: _propTypes.default.shape({}), pickerProps: _propTypes.default.shape({}) };RNPickerSelect.defaultProps = { value: undefined, placeholder: { label: 'Select an item...', value: null, color: '#9EA0A4' }, disabled: false, itemKey: null, style: {}, children: null, hideIcon: false, placeholderTextColor: '#C7C7CD', useNativeAndroidPickerStyle: true, hideDoneBar: false, doneText: 'Done', onDonePress: null, onUpArrow: null, onDownArrow: null, modalProps: {}, textInputProps: {}, pickerProps: {} };
+
+
+var defaultStyles = _reactNative.StyleSheet.create({
+  viewContainer: {
+    alignSelf: 'stretch' },
+
+  chevronContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    marginLeft: 15 },
+
+  chevron: {
+    width: 15,
+    height: 15,
+    backgroundColor: 'transparent',
+    borderTopWidth: 1.5,
+    borderTopColor: '#D0D4DB',
+    borderRightWidth: 1.5,
+    borderRightColor: '#D0D4DB' },
+
+  chevronUp: {
+    transform: [{ translateY: 17 }, { rotate: '-45deg' }] },
+
+  chevronDown: {
+    transform: [{ translateY: 8 }, { rotate: '135deg' }] },
+
+  chevronActive: {
+    borderTopColor: '#007AFE',
+    borderRightColor: '#007AFE' },
+
+  icon: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+    borderTopWidth: 10,
+    borderTopColor: 'gray',
+    borderRightWidth: 10,
+    borderRightColor: 'transparent',
+    borderLeftWidth: 10,
+    borderLeftColor: 'transparent',
+    width: 0,
+    height: 0,
+    top: 20,
+    right: 10 },
+
+  modalViewTop: {
+    flex: 1 },
+
+  modalViewMiddle: {
+    height: 44,
+    zIndex: 2,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#EFF1F2',
+    borderTopWidth: 0.5,
+    borderTopColor: '#919498' },
+
+  modalViewBottom: {
+    height: 215,
+    justifyContent: 'center',
+    backgroundColor: '#D0D4DB' },
+
+  done: {
+    color: '#007AFE',
+    fontWeight: 'bold',
+    padding: 10,
+    fontSize: 18 },
+
+  underline: {
+    borderTopWidth: 1,
+    borderTopColor: '#888988',
+    marginHorizontal: 4 },
+
+  headlessAndroidPicker: {
+    position: 'absolute',
+    top: 0,
+    width: 1000,
+    height: 1000,
+    color: 'transparent' } });

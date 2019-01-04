@@ -7,7 +7,7 @@ import unescape from 'unescape';
 import Button from '../global/Button';
 import Colors from '../../resources/Colors';
 import QuestionResultModal from '../modal/QuestionResultModal';
-import { storeData } from '../global/tools';
+import { storeData, shuffleAnswers } from '../global/tools';
 import Spinner from '../global/Spinner';
 
 type Question = {
@@ -46,16 +46,20 @@ type Props = {
  * Place where the questions are asked =D
  */
 export default class QuestionScreen extends React.Component <Props, State> {
-  state = {
-    isModalVisible: false,
-    currentQuestionNumber: 0,
-    currentQuestion: null,
-    currentAnswers: [],
-    currentCorrectAnswer: null,
-    pointsEarned: 0,
-    answerSelected: '',
-    isCorrect: false,
-  };
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      isModalVisible: false,
+      currentQuestionNumber: 0,
+      currentQuestion: null,
+      currentAnswers: [],
+      currentCorrectAnswer: null,
+      pointsEarned: 0,
+      answerSelected: '',
+      isCorrect: false,
+    };
+  }
+
 
   componentDidMount(): void {
     this.showQuestion(0);
@@ -112,7 +116,7 @@ export default class QuestionScreen extends React.Component <Props, State> {
         isModalVisible: false,
         currentQuestion,
         currentQuestionNumber: questionNumber,
-        currentAnswers: this.shuffleAnswers(currentQuestion.correct_answer, currentQuestion.incorrect_answers),
+        currentAnswers: shuffleAnswers(currentQuestion.correct_answer, currentQuestion.incorrect_answers),
         currentCorrectAnswer: currentQuestion.correct_answer,
         answerSelected: '',
       });
@@ -159,16 +163,6 @@ export default class QuestionScreen extends React.Component <Props, State> {
     const { currentQuestionNumber } = this.state;
     this.showQuestion(currentQuestionNumber + 1);
   }
-
-  /**
-   * Shuffle the correct answer with the incorrects.
-   * @param  {string} correctAnsw
-   * @param  {Array<string>} incorrectAnsw
-   */
-  shuffleAnswers = (correctAnsw: string, incorrectAnsw: Array<string>): Array<string> => [...incorrectAnsw, correctAnsw]
-    .map((a: any) => [Math.random(), a])
-    .sort((a: any, b: any) => a[0] - b[0])
-    .map((a: any) => a[1])
 
   render(): React.Node {
     const {

@@ -1,0 +1,6 @@
+366ee152f3fe35e9751e2e59765fab9d
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  black: '#232931',
+  red: '#f73859',
+  yellow: '#f1d18a',
+  gray: '#ededed' };exports.default = _default;

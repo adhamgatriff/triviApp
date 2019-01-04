@@ -1,0 +1,10 @@
+7dd787496ec7282efcfcad1a098fd718
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));var _tools = require("../components/global/tools");
+
+describe('Tools tests', function () {
+  test('should bring questions from API correctly', function _callee() {var questions;return _regenerator.default.async(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return _regenerator.default.awrap(
+            (0, _tools.fetchQuestions)());case 2:questions = _context.sent;
+
+            expect(questions.results.length).toBeGreaterThanOrEqual(0);case 4:case "end":return _context.stop();}}}, null, this);});
+
+});

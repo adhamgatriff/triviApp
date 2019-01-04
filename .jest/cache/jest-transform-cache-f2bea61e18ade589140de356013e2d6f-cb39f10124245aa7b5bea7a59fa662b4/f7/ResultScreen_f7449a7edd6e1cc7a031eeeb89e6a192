@@ -1,0 +1,150 @@
+9bc29d2dfacda421bc5e9adf18ee1200
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+var React = _interopRequireWildcard(require("react"));
+var _reactNative = require("react-native");
+
+
+var _Colors = _interopRequireDefault(require("../../resources/Colors"));
+var _Button = _interopRequireDefault(require("../global/Button"));
+var _tools = require("../global/tools");var _jsxFileName = "C:\\Users\\BESSY\\Documents\\triviaApp\\components\\views\\ResultScreen.js";var
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ResultScreen = function (_React$Component) {(0, _inherits2.default)(ResultScreen, _React$Component);
+
+  function ResultScreen(props) {var _this;(0, _classCallCheck2.default)(this, ResultScreen);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(ResultScreen).call(this, props));_this.
+
+
+
+
+
+    goToMenu = function () {var
+      navigation = _this.props.navigation;
+      navigation.navigate('Home');
+    };_this.
+
+
+
+
+    playAgain = function _callee() {var navigation, username, difficulty, questionNumber, categorySelected, questions;return _regenerator.default.async(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              navigation = _this.props.navigation;
+              username = navigation.getParam('username');
+              difficulty = navigation.getParam('difficulty');
+              questionNumber = navigation.getParam('questionNumber');
+              categorySelected = navigation.getParam('categorySelected');_context.next = 7;return _regenerator.default.awrap(
+
+              (0, _tools.fetchQuestions)(difficulty, questionNumber, categorySelected).
+              catch(function () {
+                _reactNative.Alert.alert(
+                'Notification',
+                'Error fetching questions, try again',
+                [{ text: 'OK' }],
+                { cancelable: false });
+
+              }));case 7:questions = _context.sent;
+
+              if (questions) {
+                navigation.navigate('QuestionScreen', {
+                  questions: questions.results,
+                  questionsLength: questions.results.length,
+                  username: username,
+                  difficulty: difficulty,
+                  categorySelected: categorySelected });
+
+              }case 9:case "end":return _context.stop();}}}, null, this);};return _this;}(0, _createClass2.default)(ResultScreen, [{ key: "render", value: function render()
+
+
+    {var
+      navigation = this.props.navigation;
+      var username = navigation.getParam('username');
+      var pointsEarned = navigation.getParam('pointsEarned');
+
+      return (
+        React.createElement(_reactNative.View, { style: styles.wrapper, __source: { fileName: _jsxFileName, lineNumber: 90 } },
+        React.createElement(_reactNative.Text, { style: styles.title, __source: { fileName: _jsxFileName, lineNumber: 91 } }, (pointsEarned < 100 ? 'Better luck next time' : 'Congratulations') + " " + username + "!!"),
+        React.createElement(_reactNative.View, { style: styles.middleWrapper, __source: { fileName: _jsxFileName, lineNumber: 92 } },
+        React.createElement(_reactNative.Text, { style: styles.middleText, __source: { fileName: _jsxFileName, lineNumber: 93 } }, "Your final score was"),
+        React.createElement(_reactNative.Text, { style: [styles.middleText, { color: _Colors.default.yellow, fontSize: 30 }], __source: { fileName: _jsxFileName, lineNumber: 94 } }, pointsEarned)),
+
+        React.createElement(_reactNative.View, { style: styles.buttonsBelow, __source: { fileName: _jsxFileName, lineNumber: 96 } },
+        React.createElement(_Button.default, {
+          buttonStyle: styles.backButton,
+          textStyle: { letterSpacing: 0 },
+          icon: "md-return-left",
+          iconColor: _Colors.default.red,
+          text: "Go to Menu",
+          action: this.goToMenu, __source: { fileName: _jsxFileName, lineNumber: 97 } }),
+
+        React.createElement(_Button.default, {
+          buttonStyle: styles.backButton,
+          textStyle: { letterSpacing: 0 },
+          icon: "md-refresh",
+          iconColor: _Colors.default.red,
+          text: "Play again",
+          action: this.playAgain, __source: { fileName: _jsxFileName, lineNumber: 105 } }))));
+
+
+
+
+    } }]);return ResultScreen;}(React.Component);exports.default = ResultScreen;
+
+
+var styles = _reactNative.StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    justifyContent: 'space-between',
+    backgroundColor: _Colors.default.black,
+    paddingTop: 20 },
+
+  backButton: {
+    backgroundColor: 'transparent' },
+
+  title: {
+    fontFamily: 'BreeSerif',
+    fontSize: 30,
+    color: _Colors.default.gray,
+    textAlign: 'center',
+    paddingHorizontal: 10 },
+
+  middleWrapper: {
+    paddingHorizontal: 10 },
+
+  buttonsBelow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingBottom: 5 },
+
+  middleText: {
+    color: _Colors.default.red,
+    fontSize: 26,
+    textAlign: 'center',
+    fontWeight: 'bold' } });
