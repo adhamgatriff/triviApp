@@ -16,6 +16,7 @@ react-native run-android
 ## Disclamer
   * I had to add useless constructors to make react-test-renderer work.
   * It only works on android because I do not have ios to configure the dependencies.
+  * Tested only in android 7.0.
 
 ## Credits
 All by myself.
