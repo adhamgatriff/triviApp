@@ -20,7 +20,7 @@ react-native run-android
 
 ## Screenshots
 
-![alt text](https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124535.png "Home Screen")
+![alt text](https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124535.png "Home Screen" | width=200)
 
 ![alt text](https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124539.png "Choose category section")
 
