@@ -20,11 +20,20 @@ react-native run-android
 
 ## Screenshots
 
-![alt text](https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124535.png "Home Screen")
-
-![alt text](https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124539.png "Choose category section")
-
-![alt text](https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124557.png "Question screen")
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
+        <img src="https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124535.png">
+      </td>
+      <td align="center" valign="middle">
+        <img src="https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124539.png">
+      </td>
+      <td align="center" valign="middle">
+        <imgsrc="https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124557.png">
+      </td>
+  </tbody>
+</table>
 
 
 ## Credits
