@@ -19,4 +19,4 @@ react-native run-android
   * Tested only in android 7.0.
 
 ## Credits
-All by myself.
+All by myself, using the Open Trivia Database
