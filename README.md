@@ -30,7 +30,7 @@ react-native run-android
         <img src="https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124539.png">
       </td>
       <td align="center" valign="middle">
-        <imgsrc="https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124557.png">
+        <img src="https://raw.githubusercontent.com/adhamgatriff/triviApp/master/screenshots/Screenshot_20190105-124557.png">
       </td>
   </tbody>
 </table>
